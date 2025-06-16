@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Reels Downloader</title>
+    <title>Instagram Downloader</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -143,9 +143,9 @@
             bottom: 0;
             left: 0;
             width: 100%;
-            height: 200px;
+            height: 100px;
             background: linear-gradient(to top, white 30%, rgba(255,255,255,0.7) 80%, transparent 100%);
-            z-index: 10;
+            z-index: 15;
             pointer-events: none;
         }
         
@@ -291,6 +291,21 @@
             font-size: 1.2rem;
         }
         
+        .scroll-block-notice {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255, 255, 255, 0.9);
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            color: #6c757d;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            z-index: 20;
+            display: none;
+        }
+        
         @media (max-width: 768px) {
             .iframe-container {
                 height: 500px;
@@ -325,7 +340,7 @@
             }
             
             .iframe-bottom-overlay {
-                height: 150px;
+                height: 80px;
             }
         }
     </style>
@@ -356,7 +371,10 @@
             <div class="iframe-overlay">
                 <div class="overlay-title">Insta Downloader</div>
             </div>
-            <div class="iframe-bottom-overlay"></div>
+            <div class="iframe-bottom-overlay" id="bottomOverlay"></div>
+            <div class="scroll-block-notice" id="scrollNotice">
+                <i class="fas fa-lock"></i> Scroll locked to protect your experience
+            </div>
         </div>
         
         <div class="download-counter">
@@ -398,6 +416,8 @@
             const downloaderFrame = document.getElementById('downloaderFrame');
             const loader = document.getElementById('loader');
             const counterEl = document.querySelector('.counter-number');
+            const bottomOverlay = document.getElementById('bottomOverlay');
+            const scrollNotice = document.getElementById('scrollNotice');
             
             // Show loader while iframe is loading
             loader.style.display = 'flex';
@@ -406,12 +426,61 @@
             downloaderFrame.onload = function() {
                 loader.style.display = 'none';
                 
+                // Show scroll notice
+                scrollNotice.style.display = 'block';
+                setTimeout(() => {
+                    scrollNotice.style.opacity = '0';
+                    setTimeout(() => {
+                        scrollNotice.style.display = 'none';
+                    }, 1000);
+                }, 3000);
+                
                 // Block any attempts to navigate away from the iframe
                 try {
                     const iframeWindow = downloaderFrame.contentWindow;
                     iframeWindow.addEventListener('beforeunload', function(e) {
                         e.preventDefault();
                         e.returnValue = '';
+                    });
+                    
+                    // Block scrolling in the iframe
+                    iframeWindow.addEventListener('wheel', function(e) {
+                        const scrollPosition = iframeWindow.scrollY;
+                        const windowHeight = iframeWindow.innerHeight;
+                        const documentHeight = iframeWindow.document.documentElement.scrollHeight;
+                        
+                        // If user is trying to scroll down near the bottom, prevent it
+                        if (scrollPosition + windowHeight > documentHeight - 300 && e.deltaY > 0) {
+                            e.preventDefault();
+                            // Scroll back up a bit to prevent viewing blocked content
+                            iframeWindow.scrollTo(0, documentHeight - 500);
+                        }
+                    });
+                    
+                    // Also block touch scrolling
+                    iframeWindow.addEventListener('touchmove', function(e) {
+                        const scrollPosition = iframeWindow.scrollY;
+                        const windowHeight = iframeWindow.innerHeight;
+                        const documentHeight = iframeWindow.document.documentElement.scrollHeight;
+                        
+                        if (scrollPosition + windowHeight > documentHeight - 300) {
+                            e.preventDefault();
+                            iframeWindow.scrollTo(0, documentHeight - 500);
+                        }
+                    });
+                    
+                    // Block keyboard scrolling
+                    iframeWindow.addEventListener('keydown', function(e) {
+                        if (e.key === 'ArrowDown' || e.key === 'PageDown') {
+                            const scrollPosition = iframeWindow.scrollY;
+                            const windowHeight = iframeWindow.innerHeight;
+                            const documentHeight = iframeWindow.document.documentElement.scrollHeight;
+                            
+                            if (scrollPosition + windowHeight > documentHeight - 300) {
+                                e.preventDefault();
+                                iframeWindow.scrollTo(0, documentHeight - 500);
+                            }
+                        }
                     });
                     
                     // Hide instructional content in iframe
