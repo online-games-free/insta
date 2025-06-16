@@ -306,6 +306,41 @@
             display: none;
         }
         
+        /* New button styles */
+        .download-more-container {
+            text-align: center;
+            margin: 20px 0 10px;
+        }
+        
+        .download-again-btn {
+            background: linear-gradient(to right, #405DE6, #833AB4, #E1306C);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .download-again-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        .download-again-btn:active {
+            transform: translateY(1px);
+        }
+        
+        .download-again-btn i {
+            font-size: 1.2rem;
+        }
+        
         @media (max-width: 768px) {
             .iframe-container {
                 height: 500px;
@@ -328,6 +363,11 @@
             .overlay-title {
                 font-size: 1.5rem;
             }
+            
+            .download-again-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
         }
         
         @media (max-width: 480px) {
@@ -341,6 +381,11 @@
             
             .iframe-bottom-overlay {
                 height: 80px;
+            }
+            
+            .download-again-btn {
+                padding: 10px 20px;
+                font-size: 0.95rem;
             }
         }
     </style>
@@ -375,6 +420,13 @@
             <div class="scroll-block-notice" id="scrollNotice">
                 <i class="fas fa-lock"></i> Scroll locked to protect your experience
             </div>
+        </div>
+        
+        <!-- New Download Again Button -->
+        <div class="download-more-container">
+            <button id="downloadAgain" class="download-again-btn">
+                <i class="fas fa-redo-alt"></i> Download Another Reel
+            </button>
         </div>
         
         <div class="download-counter">
@@ -418,6 +470,7 @@
             const counterEl = document.querySelector('.counter-number');
             const bottomOverlay = document.getElementById('bottomOverlay');
             const scrollNotice = document.getElementById('scrollNotice');
+            const downloadAgainBtn = document.getElementById('downloadAgain');
             
             // Show loader while iframe is loading
             loader.style.display = 'flex';
@@ -511,6 +564,41 @@
                 }
             };
             
+            // Download Again button functionality
+            downloadAgainBtn.addEventListener('click', function() {
+                // Show loader
+                loader.style.display = 'flex';
+                
+                // Reset the iframe
+                downloaderFrame.src = 'https://reelsave.app/';
+                
+                // Animate button
+                this.classList.add('processing');
+                setTimeout(() => {
+                    this.classList.remove('processing');
+                }, 1000);
+                
+                // Show confirmation message
+                const confirmation = document.createElement('div');
+                confirmation.innerHTML = '<i class="fas fa-check-circle"></i> Ready to download again!';
+                confirmation.style.position = 'fixed';
+                confirmation.style.top = '20px';
+                confirmation.style.left = '50%';
+                confirmation.style.transform = 'translateX(-50%)';
+                confirmation.style.background = '#4CAF50';
+                confirmation.style.color = 'white';
+                confirmation.style.padding = '10px 20px';
+                confirmation.style.borderRadius = '30px';
+                confirmation.style.zIndex = '1000';
+                confirmation.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                confirmation.style.animation = 'fadeInOut 3s forwards';
+                document.body.appendChild(confirmation);
+                
+                setTimeout(() => {
+                    document.body.removeChild(confirmation);
+                }, 3000);
+            });
+            
             // Simulate download counter
             let count = 15382;
             setInterval(() => {
@@ -518,6 +606,18 @@
                 counterEl.textContent = count.toLocaleString();
             }, 3000);
         });
+        
+        // Add fade animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; top: 0px; }
+                20% { opacity: 1; top: 20px; }
+                80% { opacity: 1; top: 20px; }
+                100% { opacity: 0; top: 0px; }
+            }
+        `;
+        document.head.appendChild(style);
     </script>
 </body>
 </html>
