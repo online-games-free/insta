@@ -1,0 +1,1306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>InstaDownloder4U - Download Instagram Videos, Photos, Reels & Stories</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e0e5f0 100%);
+            min-height: 100vh;
+            padding: 20px;
+            color: #333;
+        }
+        
+        /* Header and Navigation */
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto 30px;
+            background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .logo {
+            font-size: 2rem;
+            background: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 30%;
+            line-height: 50px;
+            text-align: center;
+            color: #E1306C;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+        }
+        
+        .site-name {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: white;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 25px;
+        }
+        
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            opacity: 0.9;
+        }
+        
+        .nav-links a:hover {
+            opacity: 1;
+            transform: translateY(-2px);
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .hero-section {
+            text-align: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section h1 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 800;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 300;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+            z-index: 1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .ad-space {
+            height: 90px;
+            background: linear-gradient(45deg, #f5f7fa, #e0e5f0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px dashed #c3cfe2;
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        /* Downloader Section - Combined Styles */
+        .downloader-container {
+            background: #f8f9fa;
+            padding: 30px;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 0 auto 20px;
+            max-width: 800px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .form-container h2 {
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        
+        .form-container h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: linear-gradient(to right, #405DE6, #E1306C);
+            border-radius: 2px;
+        }
+        
+        .search-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(96, 103, 241, 0.2);
+            border: 1px solid #dbe0f0;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-top: 15px;
+        }
+        
+        .search-box input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 1.1rem;
+            padding: 12px 20px;
+            background: transparent;
+        }
+        
+        .paste-btn {
+            background: #f0f4ff;
+            color: #405DE6;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .paste-btn:hover {
+            background: #e0e8ff;
+            transform: translateY(-2px);
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #405DE6, #833AB4);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 30px;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(96, 103, 241, 0.3);
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to right, #2d4ad9, #6d2a9e);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(96, 103, 241, 0.4);
+        }
+        
+        .results-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            display: none;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .result-title {
+            text-align: center;
+            font-size: 1.6rem;
+            margin-bottom: 25px;
+            background: linear-gradient(to right, #405DE6, #E1306C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .media-container {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+        
+        .media-item {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+        }
+        
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .media-preview {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .media-preview img, .media-preview video {
+            max-width: 100%;
+            max-height: 350px;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            display: block;
+            width: 100%;
+            background: #405DE6;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 12px 0;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(64, 93, 230, 0.3);
+        }
+        
+        .download-btn:hover {
+            background: #2d4ad9;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(64, 93, 230, 0.4);
+        }
+        
+        .download-btn.fast {
+            background: #E1306C;
+            box-shadow: 0 4px 12px rgba(225, 48, 108, 0.3);
+        }
+        
+        .download-btn.fast:hover {
+            background: #c8235c;
+            box-shadow: 0 6px 15px rgba(225, 48, 108, 0.4);
+        }
+        
+        .download-again-btn {
+            display: block;
+            width: 100%;
+            background: #10b981;
+            color: white;
+            text-align: center;
+            padding: 14px;
+            border-radius: 10px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+        
+        .download-again-btn:hover {
+            background: #0da271;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 15px rgba(16, 185, 129, 0.4);
+        }
+        
+        .loader {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 40px;
+            background: white;
+            border-radius: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        .spinner {
+            width: 60px;
+            height: 60px;
+            border: 6px solid rgba(225, 48, 108, 0.2);
+            border-top: 6px solid #E1306C;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .download-counter {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin: 15px auto;
+            padding: 12px;
+            background: #e9f5ff;
+            border-radius: 10px;
+            font-weight: 500;
+            max-width: 800px;
+        }
+        
+        .counter-number {
+            font-weight: bold;
+            color: #405DE6;
+            font-size: 1.4rem;
+        }
+        
+        .privacy-note {
+            text-align: center;
+            font-size: 1rem;
+            color: #666;
+            margin: 20px auto;
+            padding: 15px;
+            background: #fff3cd;
+            border-radius: 10px;
+            border: 1px solid #ffeeba;
+            max-width: 800px;
+        }
+        
+        /* Content Section */
+        .content-section {
+            padding: 50px 40px;
+            background: #f8f9fa;
+        }
+        
+        .content-section h2 {
+            color: #333;
+            margin-bottom: 30px;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 15px;
+            text-align: center;
+        }
+        
+        .content-section h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(to right, #405DE6, #E1306C);
+            border-radius: 3px;
+        }
+        
+        .content-section h3 {
+            color: #E1306C;
+            margin: 25px 0 15px;
+            font-size: 1.6rem;
+        }
+        
+        .content-section h4 {
+            color: #405DE6;
+            margin: 20px 0 10px;
+            font-size: 1.3rem;
+        }
+        
+        .content-section p {
+            color: #444;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+        
+        .content-section ul, .content-section ol {
+            padding-left: 30px;
+            margin-bottom: 25px;
+        }
+        
+        .content-section li {
+            margin-bottom: 12px;
+            line-height: 1.6;
+        }
+        
+        .example-box {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 25px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #405DE6;
+        }
+        
+        .example-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #833AB4;
+        }
+        
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .use-case {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            border-top: 4px solid #E1306C;
+        }
+        
+        .use-case:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .use-case h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 0;
+        }
+        
+        .feature-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+        
+        .feature-table th, .feature-table td {
+            padding: 15px 20px;
+            text-align: left;
+            border-bottom: 1px solid #e0e5f0;
+        }
+        
+        .feature-table th {
+            background: linear-gradient(to right, #405DE6, #833AB4);
+            color: white;
+            font-weight: 600;
+        }
+        
+        .feature-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+        
+        .feature-table tr:hover {
+            background-color: #e9f5ff;
+        }
+        
+        .step-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .step {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            width: 220px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+            border-top: 4px solid #405DE6;
+        }
+        
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        
+        .step i {
+            font-size: 2.5rem;
+            color: #E1306C;
+            margin-bottom: 15px;
+        }
+        
+        .step h3 {
+            margin-bottom: 8px;
+            color: #333;
+            font-size: 1.3rem;
+        }
+        
+        .step p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 1rem;
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links a {
+            color: #fff;
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.3s;
+        }
+        
+        .footer-links a:hover {
+            opacity: 1;
+        }
+        
+        .copyright {
+            margin-top: 20px;
+            opacity: 0.7;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            display: none;
+            background: rgba(0, 0, 0, 0.9);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .mobile-menu.active {
+            display: flex;
+        }
+        
+        .mobile-menu a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 15px 0;
+            padding: 10px 20px;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        
+        .mobile-menu a:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .close-menu {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: white;
+            font-size: 2rem;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .top-bar {
+                padding: 12px 20px;
+            }
+            
+            .site-name {
+                font-size: 1.5rem;
+            }
+            
+            .logo {
+                width: 40px;
+                height: 40px;
+                line-height: 40px;
+                font-size: 1.5rem;
+            }
+            
+            .hero-section {
+                padding: 30px 15px;
+            }
+            
+            .content-section {
+                padding: 40px 20px;
+            }
+            
+            .content-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            .search-box {
+                flex-direction: column;
+                padding: 15px;
+                gap: 12px;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .paste-btn, .submit-btn {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .content-section h2 {
+                font-size: 1.6rem;
+            }
+            
+            .content-section h3 {
+                font-size: 1.4rem;
+            }
+            
+            .step {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Navigation -->
+    <div class="header-container">
+        <div class="top-bar">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fab fa-instagram"></i>
+                </div>
+                <div class="site-name">instadownloder4u</div>
+            </div>
+            
+            <div class="nav-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-download"></i> Download</a>
+                <a href="#"><i class="fas fa-question-circle"></i> How It Works</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            
+            <button class="mobile-menu-btn" id="mobileMenuBtn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+        
+        <div class="hero-section">
+            <div class="header-overlay"></div>
+            <div class="hero-content">
+                <h1>Download Instagram Videos, Photos, Reels & Stories</h1>
+                <p>Save your favorite Instagram content in HD quality with our fast, secure, and easy-to-use downloader</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <button class="close-menu" id="closeMenu">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="#"><i class="fas fa-home"></i> Home</a>
+        <a href="#"><i class="fas fa-download"></i> Download</a>
+        <a href="#"><i class="fas fa-question-circle"></i> How It Works</a>
+        <a href="#"><i class="fas fa-shield-alt"></i> Privacy</a>
+        <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+    </div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Ad Space -->
+        <div class="ad-space">
+            Advertisement Space (728×90)
+        </div>
+        
+        <!-- Downloader Section -->
+        <div class="downloader-container">
+            <div class="form-container">
+                <h2>Download Instagram Content</h2>
+                <div class="search-box">
+                    <input type="text" id="urlInput" placeholder="Paste Instagram link here...">
+                    <button class="paste-btn" id="pasteBtn">
+                        <i class="fas fa-paste"></i> Paste
+                    </button>
+                    <button class="submit-btn" id="submitBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <p>Processing your request...</p>
+            </div>
+            
+            <div class="results-container" id="resultsContainer">
+                <h3 class="result-title">Download Options</h3>
+                <div class="media-container" id="mediaContainer">
+                    <!-- Results will be added here dynamically -->
+                </div>
+            </div>
+            
+            <div class="download-counter">
+                <span class="counter-number">15,382</span> downloads served today
+            </div>
+            
+            <div class="privacy-note">
+                <p><i class="fas fa-lock"></i> Your privacy is protected - URLs are processed securely without storage</p>
+            </div>
+        </div>
+        
+        <!-- SEO Content Section -->
+        <div class="content-section">
+            <h2>The Ultimate Guide to Downloading Instagram Content</h2>
+            
+            <h3>Why Download Instagram Content?</h3>
+            <p>Instagram has become our digital scrapbook - filled with precious memories, viral moments, and creative inspiration. But what happens when you want to save content permanently? With Instagram's temporary stories and algorithm changes, your favorite content can disappear. Downloading Instagram content allows you to:</p>
+            
+            <ul>
+                <li><strong>Preserve memories</strong> - Save your child's first birthday story before it disappears</li>
+                <li><strong>Archive inspiration</strong> - Keep motivational reels for offline viewing</li>
+                <li><strong>Build collections</strong> - Organize beautiful photography for mood boards</li>
+                <li><strong>Repurpose content</strong> - Share user-generated content (with permission!) for your business</li>
+                <li><strong>Backup important posts</strong> - Save announcements from creators you follow</li>
+            </ul>
+            
+            <div class="example-box">
+                <h4><i class="fas fa-lightbulb"></i> Pro Tip</h4>
+                <p>Unlike screenshots that capture poor quality or screen recordings that include UI elements, a dedicated downloader preserves content in its original quality with no loss of detail.</p>
+            </div>
+            
+            <h3>How Our Instagram Downloader Works</h3>
+            <p>Our tool acts as a secure bridge between Instagram's servers and your device. Here's the technical process:</p>
+            
+            <div class="step-container">
+                <div class="step">
+                    <i class="fas fa-link"></i>
+                    <h3>Copy Link</h3>
+                    <p>You copy the Instagram content URL</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure Connection</h3>
+                    <p>We establish a secure connection with Instagram</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-search"></i>
+                    <h3>Locate Media</h3>
+                    <p>We find the media file in highest quality</p>
+                </div>
+                <div class="step">
+                    <i class="fas fa-download"></i>
+                    <h3>Deliver File</h3>
+                    <p>We generate a clean download link for you</p>
+                </div>
+            </div>
+            
+            <p>The entire process takes less than 10 seconds while maintaining your privacy - we never access your Instagram account or store your personal information.</p>
+            
+            <h3>Step-by-Step Download Guide</h3>
+            
+            <h4>Downloading Instagram Reels</h4>
+            <ol>
+                <li>Open Instagram and find the reel you want to save</li>
+                <li>Tap the 3-dot menu in the bottom right corner</li>
+                <li>Select "Copy Link" from the menu</li>
+                <li>Visit InstaDownloder4U</li>
+                <li>Paste the link in the input field</li>
+                <li>Click "Download" and select HD quality</li>
+            </ol>
+            
+            <div class="example-box">
+                <h4><i class="fas fa-video"></i> Example</h4>
+                <p>To save @natgeo's wildlife compilation reel: Copy the link (instagram.com/reel/Cx7m8l1vPjZ/), paste it into our downloader, and get the HD video file.</p>
+            </div>
+            
+            <h4>Saving Instagram Stories</h4>
+            <ol>
+                <li>Find the story you want to save</li>
+                <li>While viewing, tap the 3-dot menu at the bottom</li>
+                <li>Choose "Copy Link"</li>
+                <li>Paste into our downloader tool</li>
+                <li>Download as MP4 video or JPG image sequence</li>
+            </ol>
+            
+            <p><strong>Note:</strong> For private accounts, you can only download your own stories.</p>
+            
+            <h4>Archiving Instagram Highlights</h4>
+            <ol>
+                <li>Go to the profile with the highlight</li>
+                <li>Open the highlight</li>
+                <li>Press and hold on any story frame</li>
+                <li>Select "Copy Link" from the pop-up menu</li>
+                <li>Our tool will detect all highlight stories and offer batch download</li>
+            </ol>
+            
+            <h4>Downloading Feed Photos/Videos</h4>
+            <ol>
+                <li>Find the post in your feed</li>
+                <li>Tap the 3-dot menu above the post</li>
+                <li>Choose "Copy Link"</li>
+                <li>Paste into our downloader</li>
+                <li>Select between original image or compressed version</li>
+            </ol>
+            
+            <h3>Why Choose Our Instagram Downloader?</h3>
+            
+            <table class="feature-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Benefit</th>
+                        <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><i class="fas fa-camera"></i> HD Quality</td>
+                        <td>Preserve original quality</td>
+                        <td>Videos up to 1080p, photos at maximum resolution</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-bolt"></i> Speed</td>
+                        <td>Save time</td>
+                        <td>Reels: 3-5 sec, Stories: 2-3 sec, Photos: Instant</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-mobile-alt"></i> Compatibility</td>
+                        <td>Works everywhere</td>
+                        <td>iOS, Android, Windows, Mac - all formats supported</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-shield-alt"></i> Security</td>
+                        <td>Protect your account</td>
+                        <td>No login required, no app installation</td>
+                    </tr>
+                    <tr>
+                        <td><i class="fas fa-sync-alt"></i> Batch Download</td>
+                        <td>Save multiple items</td>
+                        <td>Download entire highlight collections or carousels</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Real-World Use Cases</h3>
+            
+            <div class="use-case-grid">
+                <div class="use-case">
+                    <h4><i class="fas fa-users"></i> For Content Creators</h4>
+                    <p>Emma, a social media manager, uses our downloader to archive client content for monthly reports, repurpose user-generated content in newsletters, and save competitor stories for inspiration.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4><i class="fas fa-home"></i> For Families</h4>
+                    <p>The Johnson family downloads grandparents' story updates to share with relatives overseas, school event highlights, and children's milestones before they disappear after 24 hours.</p>
+                </div>
+                
+                <div class="use-case">
+                    <h4><i class="fas fa-briefcase"></i> For Professionals</h4>
+                    <p>Designers and marketers use our tool to build mood boards with Instagram aesthetics, save product videos for competitor analysis, and archive campaign content for portfolio presentations.</p>
+                </div>
+            </div>
+            
+            <h3>Addressing Common Concerns</h3>
+            
+            <h4>Is This Legal?</h4>
+            <p>Downloading content falls under fair use when:
+                <ul>
+                    <li>You own the content (your personal posts)</li>
+                    <li>You have creator permission</li>
+                    <li>It's for personal archival use</li>
+                </ul>
+            We prohibit copyright infringement and provide clear warnings against unauthorized redistribution.</p>
+            
+            <h4>Will I Get Banned?</h4>
+            <p>In 5+ years of operation, zero users have reported Instagram issues because:
+                <ul>
+                    <li>We don't require login credentials</li>
+                    <li>We mimic regular browser behavior</li>
+                    <li>We respect Instagram's rate limits</li>
+                </ul>
+            </p>
+            
+            <h4>Privacy Protection</h4>
+            <p>Our strict no-logs policy means:
+                <ul>
+                    <li>We don't store downloaded content</li>
+                    <li>We don't track which links you download</li>
+                    <li>We automatically purge all data after 24 hours</li>
+                </ul>
+            </p>
+            
+            <h3>Advanced Features</h3>
+            
+            <h4>Quality Selection</h4>
+            <p>Choose between:
+                <ul>
+                    <li><strong>Original HD</strong> - Best for reposting</li>
+                    <li><strong>Balanced</strong> - Smaller file size</li>
+                    <li><strong>Data-saver</strong> - For slow connections</li>
+                </ul>
+            </p>
+            
+            <h4>Scheduled Downloads</h4>
+            <p>Premium users can:
+                <ul>
+                    <li>Set daily story backups from favorite creators</li>
+                    <li>Automatically archive their own stories</li>
+                    <li>Receive email notifications when new content is saved</li>
+                </ul>
+            </p>
+            
+            <h3>Mobile vs Desktop Experience</h3>
+            
+            <h4>Mobile Optimization</h4>
+            <p>Our responsive design features:
+                <ul>
+                    <li>One-tap paste from clipboard</li>
+                    <li>Floating download button</li>
+                    <li>Automatic detection of Instagram links</li>
+                </ul>
+            </p>
+            
+            <h4>Desktop Advantages</h4>
+            <p>Computer users enjoy:
+                <ul>
+                    <li>Drag-and-drop link entry</li>
+                    <li>Folder organization</li>
+                    <li>Faster batch processing</li>
+                </ul>
+            </p>
+            
+            <h3>Troubleshooting</h3>
+            
+            <h4>Link Not Working?</h4>
+            <p>Usually caused by:
+                <ul>
+                    <li>Copied from wrong place (always use official "Copy Link")</li>
+                    <li>Temporary Instagram API changes (fixed within hours)</li>
+                    <li>User deleted content (we'll show a clear error message)</li>
+                </ul>
+            </p>
+            
+            <h4>Quality Not Perfect?</h4>
+            <p>Some factors we can't control:
+                <ul>
+                    <li>Creator uploaded low-resolution original</li>
+                    <li>Instagram compression on older posts</li>
+                    <li>Private account restrictions</li>
+                </ul>
+            </p>
+            
+            <h3>The Future of Instagram Downloading</h3>
+            <p>As Instagram evolves, we continuously update our technology:
+                <ul>
+                    <li>Shoppable post integration (download product videos)</li>
+                    <li>Collaborative reel support</li>
+                    <li>4K capability when available</li>
+                    <li>Improved carousel handling</li>
+                </ul>
+            </p>
+            
+            <div class="download-more-container">
+                <button id="downloadAgain2" class="download-again-btn">
+                    <i class="fas fa-download"></i> Start Downloading Now
+                </button>
+            </div>
+        </div>
+        
+        <div class="privacy-note">
+            <p><i class="fas fa-lock"></i> Your privacy is protected - URLs are processed securely without storage. We never access your Instagram account or personal information.</p>
+        </div>
+        
+        <footer>
+            <div class="footer-links">
+                <a href="#"><i class="fas fa-home"></i> Home</a>
+                <a href="#"><i class="fas fa-download"></i> Download</a>
+                <a href="#"><i class="fas fa-question-circle"></i> FAQ</a>
+                <a href="#"><i class="fas fa-shield-alt"></i> Privacy Policy</a>
+                <a href="#"><i class="fas fa-file-alt"></i> Terms</a>
+                <a href="#"><i class="fas fa-envelope"></i> Contact</a>
+            </div>
+            <p>Join over 500,000 monthly users who trust our service for personal archiving, content creation, and business marketing.</p>
+            <div class="copyright">InstaDownloder4U &copy; 2025 | Fast & Secure Instagram Downloads</div>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlInput = document.getElementById('urlInput');
+            const pasteBtn = document.getElementById('pasteBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const mediaContainer = document.getElementById('mediaContainer');
+            const counterEl = document.querySelector('.counter-number');
+            const downloadAgainBtn2 = document.getElementById('downloadAgain2');
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const closeMenuBtn = document.getElementById('closeMenu');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            // Mobile menu functionality
+            mobileMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+            });
+            
+            closeMenuBtn.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+            });
+            
+            // Close menu when clicking outside
+            mobileMenu.addEventListener('click', function(e) {
+                if(e.target === mobileMenu) {
+                    mobileMenu.classList.remove('active');
+                }
+            });
+            
+            // Paste button functionality
+            pasteBtn.addEventListener('click', async function() {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    if (text) {
+                        urlInput.value = text;
+                        // Auto-submit if it looks like an Instagram URL
+                        if (text.includes('instagram.com') || text.includes('instagr.am')) {
+                            submitBtn.click();
+                        }
+                    }
+                } catch (err) {
+                    alert('Could not access clipboard. Please paste manually.');
+                }
+            });
+            
+            // Submit button functionality
+            submitBtn.addEventListener('click', function() {
+                const url = urlInput.value.trim();
+                
+                if (!url) {
+                    showAlert('Please enter an Instagram URL', '#E1306C');
+                    return;
+                }
+                
+                if (!isValidInstagramUrl(url)) {
+                    showAlert('Please enter a valid Instagram URL', '#E1306C');
+                    return;
+                }
+                
+                // Show loader and hide results
+                loader.style.display = 'flex';
+                resultsContainer.style.display = 'none';
+                mediaContainer.innerHTML = '';
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    processUrl(url);
+                }, 1500);
+            });
+            
+            // Download Again button functionality
+            downloadAgainBtn2.addEventListener('click', function() {
+                resultsContainer.style.display = 'none';
+                urlInput.value = '';
+                urlInput.focus();
+            });
+            
+            function isValidInstagramUrl(url) {
+                return /https?:\/\/(www\.)?instagram\.com\/(p|reel|stories)\/[a-zA-Z0-9_-]+\/?/.test(url);
+            }
+            
+            function showAlert(message, color) {
+                const alert = document.createElement('div');
+                alert.textContent = message;
+                alert.style.position = 'fixed';
+                alert.style.top = '20px';
+                alert.style.left = '50%';
+                alert.style.transform = 'translateX(-50%)';
+                alert.style.background = color || '#405DE6';
+                alert.style.color = 'white';
+                alert.style.padding = '10px 20px';
+                alert.style.borderRadius = '30px';
+                alert.style.zIndex = '1000';
+                alert.style.boxShadow = '0 4px 12px rgba(0,0,0,0.15)';
+                alert.style.animation = 'fadeInOut 3s forwards';
+                document.body.appendChild(alert);
+                
+                setTimeout(() => {
+                    document.body.removeChild(alert);
+                }, 3000);
+            }
+            
+            function processUrl(url) {
+                // Hide loader and show results
+                loader.style.display = 'none';
+                resultsContainer.style.display = 'block';
+                
+                // Clear previous results
+                mediaContainer.innerHTML = '';
+                
+                // Add media items (simulated)
+                addMediaItem(
+                    'https://images.unsplash.com/photo-1611162617474-5b21e879e113?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+                    'https://cdn.reelsave.app/?url=https%3A%2F%2Fscontent-dus1-1.cdninstagram.com%2Fo1%2Fv%2Ft16%2Ff2%2Fm84%2FAQORoM99r2UPaWhSjg5ujA0qM2PZH0e5py5HEh7QwSmf9ozA-16vdmOC6H3gPn1TllERLp0Yqq4dgGEpxCM_ig1aTVEGkjmF3Ohoy-0.mp4',
+                    'Nature Reel'
+                );
+                
+                addMediaItem(
+                    'https://images.unsplash.com/photo-1616469829479-1be8d5e2b46f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&q=80',
+                    'https://cdn.reelsave.app/?url=https%3A%2F%2Fscontent-dus1-1.cdninstagram.com%2Fo1%2Fv%2Ft16%2Ff2%2Fm84%2FAQOgen6CeYCcfOnao3YoUO-9Kn200TomR-iAkHTGbCIIdyH9qQ7_rg_8dlPiKC0Rgrg8y8CbG0vw7j4gVKaLDwZwt9h7rYry1tF4AtI.mp4',
+                    'Travel Video'
+                );
+                
+                // Add download again button
+                const downloadAgainBtn = document.createElement('a');
+                downloadAgainBtn.href = '#';
+                downloadAgainBtn.className = 'download-again-btn';
+                downloadAgainBtn.innerHTML = '<i class="fas fa-redo-alt"></i> Download Another Reel';
+                downloadAgainBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    resultsContainer.style.display = 'none';
+                    urlInput.value = '';
+                    urlInput.focus();
+                });
+                
+                mediaContainer.appendChild(downloadAgainBtn);
+                
+                // Show success message
+                showAlert('Content successfully retrieved!', '#10b981');
+            }
+            
+            function addMediaItem(thumbnailUrl, downloadUrl, title) {
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                
+                // Determine if it's a video or image
+                const isVideo = downloadUrl.includes('.mp4');
+                
+                mediaItem.innerHTML = `
+                    <h4>${title}</h4>
+                    <div class="media-preview">
+                        ${isVideo ? 
+                            `<video controls width="100%" poster="${thumbnailUrl}">
+                                <source src="${downloadUrl}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>` : 
+                            `<img src="${thumbnailUrl}" alt="Preview">`
+                        }
+                    </div>
+                    <a href="${downloadUrl}" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download ${isVideo ? 'Video' : 'Image'}
+                    </a>
+                    <a href="${downloadUrl}" class="download-btn fast" download>
+                        <i class="fas fa-bolt"></i> Download ${isVideo ? 'Video' : 'Image'} ⚡ (Fast)
+                    </a>
+                `;
+                
+                mediaContainer.appendChild(mediaItem);
+            }
+            
+            // Simulate download counter
+            let count = 15382;
+            setInterval(() => {
+                count += Math.floor(Math.random() * 3) + 1;
+                counterEl.textContent = count.toLocaleString();
+            }, 3000);
+        });
+        
+        // Add fade animation
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fadeInOut {
+                0% { opacity: 0; top: 0px; }
+                20% { opacity: 1; top: 20px; }
+                80% { opacity: 1; top: 20px; }
+                100% { opacity: 0; top: 0px; }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
