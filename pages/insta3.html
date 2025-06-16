@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Reels Downloader</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e0e5f0 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        header {
+            background: linear-gradient(to right, #405DE6, #5851DB, #833AB4, #C13584, #E1306C, #FD1D1D);
+            padding: 25px 20px;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.1);
+        }
+        
+        .logo {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            display: inline-block;
+            background: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 30%;
+            line-height: 70px;
+            color: #E1306C;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+            position: relative;
+            z-index: 2;
+        }
+        
+        header h1 {
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+        
+        header p {
+            font-size: 1rem;
+            opacity: 0.95;
+            max-width: 500px;
+            margin: 0 auto;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .ad-space {
+            height: 90px;
+            background: linear-gradient(45deg, #f5f7fa, #e0e5f0);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 2px dashed #c3cfe2;
+            color: #6c757d;
+            font-weight: 500;
+            font-size: 1.1rem;
+        }
+        
+        .main-content {
+            padding: 20px;
+            background: #f8f9fa;
+        }
+        
+        .form-container {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .form-container h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.6rem;
+            position: relative;
+            padding-bottom: 12px;
+            text-align: center;
+        }
+        
+        .form-container h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 70px;
+            height: 4px;
+            background: linear-gradient(to right, #405DE6, #E1306C);
+            border-radius: 2px;
+        }
+        
+        .search-box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(96, 103, 241, 0.2);
+            border: 1px solid #c3cfe2;
+            background: white;
+            padding: 8px 15px;
+            border-radius: 50px;
+            margin-top: 15px;
+        }
+        
+        .search-box input {
+            flex-grow: 1;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            padding: 10px 15px;
+            background: transparent;
+        }
+        
+        .paste-btn {
+            background: #f0f4ff;
+            color: #405DE6;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .paste-btn:hover {
+            background: #e0e8ff;
+        }
+        
+        .submit-btn {
+            background: linear-gradient(to right, #405DE6, #833AB4);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            transition: all 0.3s ease;
+        }
+        
+        .submit-btn:hover {
+            background: linear-gradient(to right, #2d4ad9, #6d2a9e);
+        }
+        
+        .results-container {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            display: none;
+        }
+        
+        .result-title {
+            text-align: center;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            background: linear-gradient(to right, #405DE6, #E1306C);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+        
+        .media-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        
+        .media-item {
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        .media-preview {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 15px;
+        }
+        
+        .media-preview img, .media-preview video {
+            max-width: 100%;
+            max-height: 300px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .download-btn {
+            display: block;
+            width: 100%;
+            background: #405DE6;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-btn:hover {
+            background: #2d4ad9;
+            transform: translateY(-2px);
+        }
+        
+        .download-btn.fast {
+            background: #E1306C;
+        }
+        
+        .download-btn.fast:hover {
+            background: #c8235c;
+        }
+        
+        .download-again-btn {
+            display: block;
+            width: 100%;
+            background: #10b981;
+            color: white;
+            text-align: center;
+            padding: 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            margin-top: 15px;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .download-again-btn:hover {
+            background: #0da271;
+            transform: translateY(-2px);
+        }
+        
+        .loader {
+            display: none;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 30px;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(225, 48, 108, 0.2);
+            border-top: 5px solid #E1306C;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        .privacy-note {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #666;
+            margin: 15px;
+            padding: 12px;
+            background: #fff3cd;
+            border-radius: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #1a1a1a;
+            color: #fff;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .search-box {
+                flex-direction: column;
+                padding: 15px;
+                gap: 10px;
+            }
+            
+            .search-box input {
+                width: 100%;
+            }
+            
+            .paste-btn, .submit-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-overlay"></div>
+            <div class="logo">
+                <i class="fab fa-instagram"></i>
+            </div>
+            <h1>Instagram Reels Downloader</h1>
+            <p>Download Instagram Reels, Stories, and Posts in HD Quality</p>
+        </header>
+        
+        <!-- Ad Space -->
+        <div class="ad-space">
+            Advertisement Space (728×90)
+        </div>
+        
+        <div class="main-content">
+            <div class="form-container">
+                <h2>Download Instagram Content</h2>
+                <div class="search-box">
+                    <input type="text" id="urlInput" placeholder="Paste Instagram link here...">
+                    <button class="paste-btn" id="pasteBtn">
+                        <i class="fas fa-paste"></i> Paste
+                    </button>
+                    <button class="submit-btn" id="submitBtn">
+                        <i class="fas fa-download"></i> Download
+                    </button>
+                </div>
+            </div>
+            
+            <div class="loader" id="loader">
+                <div class="spinner"></div>
+                <p>Processing your request...</p>
+            </div>
+            
+            <div class="results-container" id="resultsContainer">
+                <h3 class="result-title">Download Options</h3>
+                <div class="media-container" id="mediaContainer">
+                    <!-- Results will be added here dynamically -->
+                </div>
+            </div>
+            
+            <div class="privacy-note">
+                <p><i class="fas fa-lock"></i> Your privacy is protected - URLs are processed securely without storage</p>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Instagram Downloader Tool &copy; 2023 | Fast & Secure Downloads</p>
+        </footer>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const urlInput = document.getElementById('urlInput');
+            const pasteBtn = document.getElementById('pasteBtn');
+            const submitBtn = document.getElementById('submitBtn');
+            const loader = document.getElementById('loader');
+            const resultsContainer = document.getElementById('resultsContainer');
+            const mediaContainer = document.getElementById('mediaContainer');
+            
+            // Paste button functionality
+            pasteBtn.addEventListener('click', async function() {
+                try {
+                    const text = await navigator.clipboard.readText();
+                    if (text) {
+                        urlInput.value = text;
+                        // Auto-submit if it looks like an Instagram URL
+                        if (text.includes('instagram.com') || text.includes('instagr.am')) {
+                            submitBtn.click();
+                        }
+                    }
+                } catch (err) {
+                    alert('Could not access clipboard. Please paste manually.');
+                }
+            });
+            
+            // Submit button functionality
+            submitBtn.addEventListener('click', function() {
+                const url = urlInput.value.trim();
+                
+                if (!url) {
+                    alert('Please enter an Instagram URL');
+                    return;
+                }
+                
+                if (!isValidInstagramUrl(url)) {
+                    alert('Please enter a valid Instagram URL');
+                    return;
+                }
+                
+                // Show loader and hide results
+                loader.style.display = 'flex';
+                resultsContainer.style.display = 'none';
+                mediaContainer.innerHTML = '';
+                
+                // Simulate processing delay
+                setTimeout(() => {
+                    processUrl(url);
+                }, 1500);
+            });
+            
+            function isValidInstagramUrl(url) {
+                return /https?:\/\/(www\.)?instagram\.com\/(p|reel|stories)\/[a-zA-Z0-9_-]+\/?/.test(url);
+            }
+            
+            function processUrl(url) {
+                // Hide loader and show results
+                loader.style.display = 'none';
+                resultsContainer.style.display = 'block';
+                
+                // Clear previous results
+                mediaContainer.innerHTML = '';
+                
+                // Add media items (simulated)
+                addMediaItem(
+                    'https://cdn.reelsave.app?url=https%3A%2F%2Fscontent-dus1-1.cdninstagram.com%2Fv%2Ft51.2885-15%2F503839368_18346251502090193_4342494593737346553_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-dus1-1.cdninstagram.com%26_nc_cat%3D105%26_nc_oc%3DQ6cZ2QE3lXcnFmwxevNS6Zg6PA102_Olo0eDsj8Aw9Wi9xA_xzY9fIh2G_M7JDlQxhy8uK4%26_nc_ohc%3DZNbn0SqjDk4Q7kNvwHDox3r%26_nc_gid%3Dyz7C_gBuukKHov99xpFDig%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_AfOc-S5rGZ3uGdMoZk7QoAwy0B6aSctqKdrrD0rE6yaLWQ%26oe%3D68556750%26_nc_sid%3D10d13b',
+                    'https://cdn.reelsave.app/?url=https%3A%2F%2Fscontent-dus1-1.cdninstagram.com%2Fo1%2Fv%2Ft16%2Ff2%2Fm84%2FAQORoM99r2UPaWhSjg5ujA0qM2PZH0e5py5HEh7QwSmf9ozA-16vdmOC6H3gPn1TllERLp0Yqq4dgGEpxCM_ig1aTVEGkjmF3Ohoy-0.mp4%3Fstp%3Ddst-mp4%26efg%3DeyJxZV9ncm91cHMiOiJbXCJpZ193ZWJfZGVsaXZlcnlfdnRzX290ZlwiXSIsInZlbmNvZGVfdGFnIjoidnRzX3ZvZF91cmxnZW4uY2Fyb3VzZWxfaXRlbS5jMi43MjAuYmFzZWxpbmUifQ%26_nc_cat%3D105%26vs%3D1316797016701388_3217040871%26_nc_vs%3DHBksFQIYTGlnX2JhY2tmaWxsX3RpbWVsaW5lX3ZvZC8zOTRGRDBBNzc2RjQ3NUVDMUExRjc3NzI3MzE0RkQ5NV92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HQ2RFTHg2VnVQcGpOWElFQU4xV1o4dGdrN2twYmtZTEFBQUYVAgLIARIAKAAYABsAFQAAJvidvNXnnNI%252FFQIoAkMzLBdATe7ZFocrAhgSZGFzaF9iYXNlbGluZV8xX3YxEQB17gdlxJ4BAA%253D%253D%26_nc_rid%3D5ca962f5d0%26ccb%3D9-4%26oh%3D00_AfOO7UDqkLS2A2GNLxRGEf3U4xAdEHC68YjXoLOOlVCKzg%26oe%3D68516F01%26_nc_sid%3D10d13b',
+                    'Video 1'
+                );
+                
+                addMediaItem(
+                    'https://cdn.reelsave.app?url=https%3A%2F%2Fscontent-dus1-1.cdninstagram.com%2Fv%2Ft51.2885-15%2F503750207_18346251616090193_2838299504349520194_n.jpg%3Fstp%3Ddst-jpg_e15_tt6%26_nc_ht%3Dscontent-dus1-1.cdninstagram.com%26_nc_cat%3D105%26_nc_oc%3DQ6cZ2QE3lXcnFmwxevNS6Zg6PA102_Olo0eDsj8Aw9Wi9xA_xzY9fIh2G_M7JDlQxhy8uK4%26_nc_ohc%3D6gzkEuNM2DgQ7kNvwFdNf5S%26_nc_gid%3Dyz7C_gBuukKHov99xpFDig%26edm%3DAPs17CUBAAAA%26ccb%3D7-5%26oh%3D00_AfNXufdeMQfg-9Y5caUDz-cRRdzArX0T8_lbwMyj0uPgSw%26oe%3D68557E99%26_nc_sid%3D10d13b',
+                    'https://cdn.reelsave.app/?url=https%3A%2F%2Fscontent-dus1-1.cdninstagram.com%2Fo1%2Fv%2Ft16%2Ff2%2Fm84%2FAQOgen6CeYCcfOnao3YoUO-9Kn200TomR-iAkHTGbCIIdyH9qQ7_rg_8dlPiKC0Rgrg8y8CbG0vw7j4gVKaLDwZwt9h7rYry1tF4AtI.mp4%3Fstp%3Ddst-mp4%26efg%3DeyJxZV9ncm91cHMiOiJbXCJpZ193ZWJfZGVsaXZlcnlfdnRzX290ZlwiXSIsInZlbmNvZGVfdGFnIjoidnRzX3ZvZF91cmxnZW4uY2Fyb3VzZWxfaXRlbS5jMi43MjAuYmFzZWxpbmUifQ%26_nc_cat%3D111%26vs%3D1058380875714485_1812801966%26_nc_vs%3DHBksFQIYTGlnX2JhY2tmaWxsX3RpbWVsaW5lX3ZvZC9FRTRBOEU4RjQ5NzBFRTlDNEZBMzdGNTlDN0Y1RTI4MF92aWRlb19kYXNoaW5pdC5tcDQVAALIARIAFQIYOnBhc3N0aHJvdWdoX2V2ZXJzdG9yZS9HSlJiQ1I3a2lVNVhkWHNDQUZKaEJxZEhTcHhzYmtZTEFBQUYVAgLIARIAKAAYABsAFQAAJviCztLnnNI%252FFQIoAkMzLBdATdEGJN0vGxgSZGFzaF9iYXNlbGluZV8xX3YxEQB17gdlxJ4BAA%253D%253D%26_nc_rid%3D5ca963c8a2%26ccb%3D9-4%26oh%3D00_AfMB9OOsX9KxKeJkxEacUh3hPNAVnSkUvCIcdm4tlZjstQ%26oe%3D68519007%26_nc_sid%3D10d13b',
+                    'Video 2'
+                );
+                
+                // Add download again button
+                const downloadAgainBtn = document.createElement('a');
+                downloadAgainBtn.href = '#';
+                downloadAgainBtn.className = 'download-again-btn';
+                downloadAgainBtn.innerHTML = '<i class="fas fa-redo-alt"></i> Download Another Reel';
+                downloadAgainBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    resultsContainer.style.display = 'none';
+                    urlInput.value = '';
+                    urlInput.focus();
+                });
+                
+                mediaContainer.appendChild(downloadAgainBtn);
+            }
+            
+            function addMediaItem(thumbnailUrl, downloadUrl, title) {
+                const mediaItem = document.createElement('div');
+                mediaItem.className = 'media-item';
+                
+                // Determine if it's a video or image
+                const isVideo = downloadUrl.includes('.mp4');
+                
+                mediaItem.innerHTML = `
+                    <h4>${title}</h4>
+                    <div class="media-preview">
+                        ${isVideo ? 
+                            `<video controls width="300" poster="${thumbnailUrl}">
+                                <source src="${downloadUrl}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>` : 
+                            `<img src="${thumbnailUrl}" alt="Preview">`
+                        }
+                    </div>
+                    <a href="${downloadUrl}" class="download-btn" download>
+                        <i class="fas fa-download"></i> Download ${isVideo ? 'Video' : 'Image'}
+                    </a>
+                    <a href="${downloadUrl}" class="download-btn fast" download>
+                        <i class="fas fa-bolt"></i> Download ${isVideo ? 'Video' : 'Image'} ⚡ (Fast)
+                    </a>
+                `;
+                
+                mediaContainer.appendChild(mediaItem);
+            }
+        });
+    </script>
+</body>
+</html>
