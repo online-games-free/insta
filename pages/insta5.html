@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Downloader</title>
+    <style>
+        /* =================================== */
+        /* ==   EASY CUSTOMIZATION AREA     == */
+        /* =================================== */
+        :root {
+            /* These are the INITIAL negative margins to hide the top of the site */
+            --iframe-initial-margin-mobile: -195px; 
+            --iframe-initial-margin-pc: -50px;
+        }
+
+
+        /* =================================== */
+        /* == UNIVERSAL & MOBILE-FIRST CSS === */
+        /* =================================== */
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #121212;
+            color: #f0f0f0;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 800px;
+            margin: 20px auto;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            color: #dbdbdb;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        /* Loading Bar Styles */
+        #loading-container {
+            display: none;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #282828;
+            border-radius: 8px;
+            max-width: 400px;
+        }
+        
+        #loading-container p {
+            margin: 0 0 10px 0;
+            font-size: 0.9rem;
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #444;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        #progress-bar-inner {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #4c68d7, #8a3ab9, #bc2a8d, #fbad50, #cd486b);
+            border-radius: 5px;
+            transition: width 10s linear; 
+        }
+
+        /* Iframe Wrapper & Iframe Styles */
+        .iframe-wrapper {
+            position: relative;
+            height: 110px; 
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            /* Transitions for height to expand smoothly */
+            transition: height 0.5s ease-in-out;
+        }
+
+        #downloader-iframe {
+            width: 100%;
+            height: 800px; /* Start tall so there's content to show */
+            border: none;
+            padding: 0;
+            /* ** CSS CHANGE: Using margin-top now, not transform ** */
+            margin-top: var(--iframe-initial-margin-mobile); 
+            /* Transitions for margin and height to expand smoothly */
+            transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out; 
+        }
+
+
+        /* =================================== */
+        /* ======== PC / DESKTOP CSS ========= */
+        /* =================================== */
+        @media (min-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            
+            .iframe-wrapper { height: 180px; }
+            
+            #downloader-iframe {
+                /* ** CSS CHANGE: Use the PC-specific margin ** */
+                margin-top: var(--iframe-initial-margin-pc);
+            }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Instagram Video & Photo Downloader</h1>
+
+        <div id="loading-container">
+            <p>Your file is being prepared, please wait...</p>
+            <div class="progress-bar">
+                <div id="progress-bar-inner"></div>
+            </div>
+        </div>
+
+        <div class="iframe-wrapper" id="iframe-wrapper">
+            <iframe 
+                id="downloader-iframe"
+                src="https://reelsave.app/"
+                scrolling="no"
+                frameborder="0">
+            </iframe>
+        </div>
+    </div>
+
+    <script>
+        // Get references, mapping them to the names you used in the reference code
+        const iframeWrapper = document.getElementById('iframe-wrapper'); // This is your 'iframe-clipper'
+        const downloaderIframe = document.getElementById('downloader-iframe');
+        const loadingContainer = document.getElementById('loading-container');
+        const progressBarInner = document.getElementById('progress-bar-inner');
+        
+        /**
+         * THIS IS THE FUNCTION YOU REQUESTED
+         * It expands the iframe using the same logic as your reference code.
+         * You can adjust all the pixel values here.
+         */
+        function expandIframeView() {
+            console.log("Timer finished. Checking screen size and changing styles.");
+            
+            // Hide the loading bar
+            loadingContainer.style.display = 'none';
+
+            const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+            if (isDesktop) {
+                // --- DESKTOP & LAPTOP EXPANDED VALUES ---
+                console.log("Applying DESKTOP styles.");
+                iframeWrapper.style.height = '2240px';
+                downloaderIframe.style.height = '3000px';
+                downloaderIframe.style.marginTop = '-100px';
+
+            } else {
+                // --- MOBILE EXPANDED VALUES ---
+                console.log("Applying MOBILE styles.");
+                iframeWrapper.style.height = '1350px';
+                downloaderIframe.style.height = '2050px';
+                downloaderIframe.style.marginTop = '-125px';
+            }
+            
+            // Allow scrolling within the iframe now that it's larger
+            downloaderIframe.scrolling = 'no';
+        }
+
+        // This function starts the whole process.
+        function startProcess() {
+            console.log("Interaction detected. Starting process.");
+
+            // 1. Show the loading container.
+            loadingContainer.style.display = 'block';
+            
+            // 2. Start the progress bar animation (the visible 10-second timer).
+            setTimeout(() => {
+                progressBarInner.style.width = '100%';
+            }, 100);
+
+            // 3. After 10 seconds, call the function to expand the iframe using your custom values.
+            setTimeout(expandIframeView, 10000); // 10000ms = 10 seconds
+        }
+
+        // The reliable trigger: listen for the mouse to move over the iframe's container.
+        // { once: true } ensures this only ever runs one time.
+        iframeWrapper.addEventListener('mouseover', startProcess, { once: true });
+
+    </script>
+
+</body>
+</html>
