@@ -125,11 +125,15 @@
         </div>
 
         <div class="iframe-wrapper" id="iframe-wrapper">
+            <!-- ================================================================ -->
+            <!-- == THIS IS THE ONLY MODIFIED PART. IT BLOCKS EXTERNAL LINKS. === -->
+            <!-- ================================================================ -->
             <iframe 
                 id="downloader-iframe"
                 src="https://reelsave.app/"
                 scrolling="no"
-                frameborder="0">
+                frameborder="0"
+                sandbox="allow-scripts allow-forms allow-same-origin">
             </iframe>
         </div>
     </div>
