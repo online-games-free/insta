@@ -3,32 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free Instagram video & photo downloader - Save Reels, Stories, IGTV in HD quality without watermark">
-    <meta name="keywords" content="instagram downloader, instagram video download, save instagram photos, instagram reels download, free instagram download">
-    <title>InstaSavePro | Free Instagram Video & Photo Downloader</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta name="description" content="Download Instagram videos, photos, Reels, and Stories for free with our easy-to-use online tool. Save any Instagram content in high quality directly to your device.">
+    <title>Free Instagram Video & Photo Downloader</title>
     <style>
         /* =================================== */
-        /* ==        GLOBAL STYLES          == */
+        /* ==   EASY CUSTOMIZATION AREA     == */
         /* =================================== */
         :root {
-            --primary: #8a3ab9;
-            --primary-dark: #6a2c8c;
-            --secondary: #4c68d7;
-            --accent: #fbad50;
-            --text: #333;
-            --light: #f8f9fa;
-            --dark: #121212;
-            --gray: #6c757d;
-            --success: #28a745;
-            --transition: all 0.3s ease;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.15);
-            --border-radius: 8px;
+            /* --- Colors --- */
+            --background-color: #121212;
+            --surface-color: #1e1e1e;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #b3b3b3;
+            --accent-gradient: linear-gradient(90deg, #4c68d7, #8a3ab9, #bc2a8d, #fbad50, #cd486b);
+            
+            /* --- Iframe Initial Hidden Margins --- */
             --iframe-initial-margin-mobile: -195px; 
             --iframe-initial-margin-pc: -50px;
         }
 
+
+        /* =================================== */
+        /* ==     GLOBAL & RESET STYLES     == */
+        /* =================================== */
         * {
             margin: 0;
             padding: 0;
@@ -36,213 +33,123 @@
         }
 
         body, html {
-            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            background-color: #f5f5f5;
-            color: var(--text);
-            line-height: 1.6;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--primary-text-color);
             overflow-x: hidden;
-        }
-
-        a {
-            text-decoration: none;
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
-        a:hover {
-            color: var(--primary-dark);
+            scroll-behavior: smooth;
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
+            width: 90%;
+            max-width: 850px;
+            margin: 40px auto;
+            padding: 20px;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 12px 28px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            border: none;
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            cursor: pointer;
-            transition: var(--transition);
-            box-shadow: var(--shadow);
+        a {
+            color: #8a3ab9;
+            text-decoration: none;
         }
-
-        .btn:hover {
-            background: linear-gradient(135deg, var(--primary-dark), var(--secondary));
-            box-shadow: var(--shadow-hover);
-            transform: translateY(-2px);
-        }
-
-        .btn:active {
-            transform: translateY(0);
-        }
-
-        section {
-            padding: 60px 0;
-        }
-
-        h1, h2, h3, h4 {
-            line-height: 1.3;
-            margin-bottom: 1rem;
-            color: var(--dark);
-        }
-
-        h1 {
-            font-size: 2.5rem;
-        }
-
-        h2 {
-            font-size: 2rem;
-            position: relative;
-            padding-bottom: 15px;
-            margin-bottom: 30px;
-        }
-
-        h2:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(to right, var(--primary), var(--accent));
-            border-radius: 2px;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .text-center h2:after {
-            left: 50%;
-            transform: translateX(-50%);
+        a:hover {
+            text-decoration: underline;
         }
 
         /* =================================== */
-        /* ==        HEADER & NAVIGATION     == */
+        /* ==      HEADER & NAVIGATION      == */
         /* =================================== */
-        header {
-            background: linear-gradient(135deg, #1a1a2e, #16213e);
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-        }
-
-        .header-container {
+        .header {
+            background-color: var(--surface-color);
+            padding: 15px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border-bottom: 1px solid #333;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 1.5rem;
+            font-weight: bold;
         }
 
-        .logo-icon {
-            font-size: 2rem;
-            color: var(--accent);
+        .nav-desktop {
+            display: none; /* Hidden on mobile */
         }
 
-        .logo-text {
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: white;
-            background: linear-gradient(to right, var(--accent), #fccc63, var(--primary));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .nav-desktop a {
+            color: var(--primary-text-color);
+            margin-left: 25px;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+        .nav-desktop a:hover {
+            color: #bc2a8d;
+            text-decoration: none;
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 30px;
-        }
-
-        .nav-link {
-            color: rgba(255, 255, 255, 0.85);
-            font-weight: 500;
-            padding: 8px 0;
-            position: relative;
-            transition: var(--transition);
-        }
-
-        .nav-link:hover {
-            color: white;
-        }
-
-        .nav-link:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--accent);
-            transition: var(--transition);
-        }
-
-        .nav-link:hover:after {
-            width: 100%;
-        }
-
-        .mobile-toggle {
-            display: none;
+        .hamburger-menu {
+            display: block; /* Shown on mobile */
             background: none;
             border: none;
-            color: white;
-            font-size: 1.5rem;
             cursor: pointer;
         }
-
-        /* =================================== */
-        /* ==      MAIN DOWNLOAD SECTION     == */
-        /* =================================== */
-        .hero {
-            background: linear-gradient(rgba(22, 33, 62, 0.9), rgba(26, 26, 46, 0.9)), url('https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1974') center/cover;
-            padding: 80px 0 60px;
-            color: white;
+        .hamburger-menu .icon {
+            stroke: var(--primary-text-color);
+            width: 30px;
+            height: 30px;
+        }
+        .hamburger-menu .close-icon {
+            display: none;
         }
 
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
+        .nav-mobile {
+            position: fixed;
+            top: 0;
+            left: -100%; /* Start off-screen */
+            width: 80%;
+            max-width: 300px;
+            height: 100%;
+            background-color: #252525;
+            z-index: 1001;
+            transition: left 0.4s ease-in-out;
+            padding-top: 80px;
+        }
+        .nav-mobile.open {
+            left: 0;
+        }
+        .nav-mobile a {
+            display: block;
+            color: var(--primary-text-color);
+            padding: 20px 25px;
+            font-size: 1.2rem;
+            border-bottom: 1px solid #333;
+        }
+
+        /* =================================== */
+        /* ==       MAIN CONTENT AREA       == */
+        /* =================================== */
+        main {
             text-align: center;
         }
-
-        .hero h1 {
-            font-size: 2.8rem;
-            margin-bottom: 20px;
-            color: white;
+        
+        .main-title {
+            color: #dbdbdb;
+            font-size: 2rem;
+            margin: 40px 20px 30px 20px;
         }
 
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 30px;
-        }
-
-        /* Iframe Wrapper & Iframe Styles */
+        /* --- Iframe & Loader --- */
         .iframe-wrapper {
             position: relative;
-            height: 120px; 
+            width: 100%; /* FULL WIDTH */
+            height: 110px; 
             overflow: hidden;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            max-width: 900px;
-            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
             transition: height 0.5s ease-in-out;
-            background: white;
-            cursor: pointer;
+            background-color: #000; /* BG for when iframe loads */
         }
 
         #downloader-iframe {
@@ -250,884 +157,285 @@
             height: 800px;
             border: none;
             padding: 0;
-            margin-top: var(--iframe-initial-margin-mobile);
+            margin-top: var(--iframe-initial-margin-mobile); 
             transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out; 
-            pointer-events: none; /* Initially block interaction */
-            overflow: hidden !important; /* Prevent scrolling */
-        }
-        
-        .instructions {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: var(--border-radius);
-            padding: 20px;
-            margin: 30px 0;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        .instructions ol {
-            text-align: left;
-            max-width: 600px;
-            margin: 0 auto;
-            padding-left: 20px;
-        }
-        
-        .instructions li {
-            margin-bottom: 10px;
-            padding-left: 10px;
         }
 
-        /* Loading Bar Styles */
         #loading-container {
-            display: none;
-            max-width: 700px;
-            margin: 20px auto;
-            padding: 30px;
-            background: white;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
+            display: none; /* Initially hidden */
+            margin: 30px auto;
+            padding: 20px;
+            background-color: var(--surface-color);
+            border-radius: 8px;
+            max-width: 90%;
+            width: 500px;
         }
         
         #loading-container p {
-            margin: 0 0 20px 0;
-            font-size: 1.1rem;
-            text-align: center;
-            color: var(--dark);
+            margin: 0 0 15px 0;
+            font-size: 1rem;
         }
 
         .progress-bar {
             width: 100%;
-            background-color: #e9ecef;
-            border-radius: 50px;
+            background-color: #444;
+            border-radius: 5px;
             height: 12px;
             overflow: hidden;
-            margin-bottom: 15px;
         }
 
         #progress-bar-inner {
             width: 0%;
             height: 100%;
-            background: linear-gradient(90deg, #4c68d7, #8a3ab9, #bc2a8d, #fbad50);
-            border-radius: 50px;
+            background: var(--accent-gradient);
+            border-radius: 5px;
             transition: width 10s linear; 
         }
 
-        .progress-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            color: var(--gray);
-        }
-        
-        .status-message {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 15px;
-            border-radius: var(--border-radius);
-            margin: 20px auto;
-            max-width: 700px;
-            text-align: center;
-            font-weight: 500;
-            display: none;
-        }
-
-        /* =================================== */
-        /* ==        CONTENT SECTIONS       == */
-        /* =================================== */
-        .features {
-            background: white;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .feature-card {
-            background: white;
-            border-radius: var(--border-radius);
-            padding: 30px;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            text-align: center;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 20px;
-            color: var(--primary);
-        }
-
-        .feature-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-        }
-
-        .how-it-works {
-            background: linear-gradient(to bottom, #f8f9fa, #e9ecef);
-        }
-
-        .steps {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .step {
-            flex: 1;
-            min-width: 250px;
-            max-width: 350px;
-            background: white;
-            padding: 30px;
-            border-radius: var(--border-radius);
-            box-shadow: var(--shadow);
-            position: relative;
-            counter-increment: step-counter;
-        }
-
-        .step:before {
-            content: counter(step-counter);
-            position: absolute;
-            top: -20px;
-            left: -20px;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(138, 58, 185, 0.3);
-        }
-
-        .step h3 {
-            margin-top: 10px;
-            margin-bottom: 15px;
-        }
-
-        .faq {
-            background: white;
-        }
-
-        .faq-container {
-            max-width: 800px;
-            margin: 40px auto 0;
-        }
-
-        .faq-item {
-            margin-bottom: 20px;
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .faq-question {
-            padding: 20px;
-            background: var(--light);
-            font-weight: 600;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .faq-question:after {
-            content: '\f107';
-            font-family: 'Font Awesome 5 Free';
-            font-weight: 900;
-            transition: var(--transition);
-        }
-
-        .faq-item.active .faq-question:after {
-            transform: rotate(180deg);
-        }
-
-        .faq-answer {
-            padding: 0 20px;
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease, padding 0.3s ease;
-        }
-
-        .faq-item.active .faq-answer {
-            padding: 20px;
-            max-height: 500px;
-        }
-
-        .comparison {
-            background: linear-gradient(to bottom, #e9ecef, #f8f9fa);
-        }
-
-        .table-container {
-            overflow-x: auto;
-            margin-top: 40px;
-            box-shadow: var(--shadow);
-            border-radius: var(--border-radius);
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            background: white;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 15px 20px;
+        /* --- SEO Article --- */
+        .content-article {
             text-align: left;
-            border-bottom: 1px solid #dee2e6;
+            line-height: 1.7;
+        }
+        .content-article h2 {
+            font-size: 1.8rem;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #333;
+        }
+        .content-article h3 {
+            font-size: 1.4rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            color: #c0c0c0;
+        }
+        .content-article p, .content-article ul {
+            margin-bottom: 15px;
+            color: var(--secondary-text-color);
+        }
+        .content-article ul {
+            padding-left: 25px;
+        }
+        .content-article strong {
+            color: var(--primary-text-color);
         }
 
-        .comparison-table th {
-            background: var(--primary);
-            color: white;
-            font-weight: 600;
-        }
 
-        .comparison-table tr:nth-child(even) {
-            background-color: #f8f9fa;
+        /* =================================== */
+        /* ==          FOOTER               == */
+        /* =================================== */
+        .footer {
+            background-color: var(--surface-color);
+            color: var(--secondary-text-color);
+            padding: 40px 5%;
+            text-align: center;
+            margin-top: 50px;
+            border-top: 1px solid #333;
         }
-
-        .comparison-table .feature {
-            font-weight: 600;
+        .footer-links {
+            margin-bottom: 20px;
         }
-
-        .comparison-table .yes {
-            color: var(--success);
-            font-weight: bold;
+        .footer-links a {
+            margin: 0 15px;
+            color: var(--secondary-text-color);
         }
-
-        .comparison-table .no {
-            color: #dc3545;
-            font-weight: bold;
+        .footer-links a:hover {
+            color: var(--primary-text-color);
+        }
+        .copyright {
+            font-size: 0.9rem;
         }
         
-        /* =================================== */
-        /* ==           FOOTER              == */
-        /* =================================== */
-        footer {
-            background: linear-gradient(to right, #1a1a2e, #16213e);
-            color: rgba(255, 255, 255, 0.8);
-            padding: 60px 0 30px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 40px;
-        }
-
-        .footer-column h3 {
-            color: white;
-            margin-bottom: 25px;
-            font-size: 1.5rem;
-            position: relative;
-            padding-bottom: 10px;
-        }
-
-        .footer-column h3:after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent);
-        }
-
-        .footer-links {
-            list-style: none;
-        }
-
-        .footer-links li {
-            margin-bottom: 12px;
-        }
-
-        .footer-links a {
-            color: rgba(255, 255, 255, 0.7);
-            transition: var(--transition);
-            display: block;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-            padding-left: 5px;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 15px;
-            margin-top: 20px;
-        }
-
-        .social-link {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            color: white;
-            transition: var(--transition);
-        }
-
-        .social-link:hover {
-            background: var(--accent);
-            transform: translateY(-3px);
-        }
-
-        .copyright {
-            text-align: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            font-size: 0.9rem;
-            color: rgba(255, 255, 255, 0.6);
-        }
 
         /* =================================== */
-        /* ==      RESPONSIVE ADJUSTMENTS   == */
+        /* ==       DESKTOP & LARGER        == */
         /* =================================== */
         @media (min-width: 768px) {
+            .hamburger-menu { display: none; }
+            .nav-desktop { display: block; }
+            .main-title { font-size: 2.8rem; }
+            
             .iframe-wrapper { height: 180px; }
             
             #downloader-iframe {
                 margin-top: var(--iframe-initial-margin-pc);
             }
         }
-        
-        @media (max-width: 992px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
-            
-            .hero h1 {
-                font-size: 2.3rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            .mobile-toggle {
-                display: block;
-            }
-            
-            .nav-menu {
-                position: fixed;
-                top: 70px;
-                left: -100%;
-                flex-direction: column;
-                background: #16213e;
-                width: 100%;
-                height: calc(100vh - 70px);
-                padding: 40px 20px;
-                transition: var(--transition);
-                gap: 20px;
-            }
-            
-            .nav-menu.active {
-                left: 0;
-            }
-            
-            .steps {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .step {
-                max-width: 100%;
-            }
-        }
-
-        @media (max-width: 576px) {
-            h1 {
-                font-size: 2rem;
-            }
-            
-            h2 {
-                font-size: 1.6rem;
-            }
-            
-            .hero {
-                padding: 60px 0 40px;
-            }
-            
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-            
-            section {
-                padding: 40px 0;
-            }
-        }
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>
-        <div class="container header-container">
-            <div class="logo">
-                <div class="logo-icon">
-                    <i class="fab fa-instagram"></i>
-                </div>
-                <div class="logo-text">InstaSavePro</div>
-            </div>
-            
-            <button class="mobile-toggle" id="mobileToggle">
-                <i class="fas fa-bars"></i>
-            </button>
-            
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="#" class="nav-link">Home</a></li>
-                <li><a href="#features" class="nav-link">Features</a></li>
-                <li><a href="#how-it-works" class="nav-link">How It Works</a></li>
-                <li><a href="#faq" class="nav-link">FAQ</a></li>
-                <li><a href="#footer" class="nav-link">Contact</a></li>
-            </ul>
-        </div>
+
+    <header class="header">
+        <div class="logo">IG Saver</div>
+        <nav class="nav-desktop">
+            <a href="#">Home</a>
+            <a href="#">About Us</a>
+            <a href="#">Contact</a>
+            <a href="#">Privacy Policy</a>
+        </nav>
+        <button class="hamburger-menu" id="hamburger-btn" aria-label="Open menu">
+            <svg class="icon open-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
+            <svg class="icon close-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
     </header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <h1>Download Instagram Videos & Photos in HD Quality</h1>
-                <p>Free online tool to save Instagram content without watermark. Works with Reels, Stories, IGTV, and posts.</p>
-                
-                <div class="iframe-wrapper" id="iframe-wrapper">
-                    <iframe 
-                        id="downloader-iframe"
-                        src="https://reelsave.app/"
-                        scrolling="no"
-                        frameborder="0"
-                        <!-- MODIFIED: Added allow-popups to fix external links -->
-                        sandbox="allow-scripts allow-forms allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-                    </iframe>
-                </div>
-                
-                <div class="instructions">
-                    <h3>How to download:</h3>
-                    <ol>
-                        <li>Paste Instagram URL in the box above</li>
-                        <li>Click the search/download button inside the box</li>
-                        <li>Wait for the progress bar to complete (10-12 seconds)</li>
-                        <li>Your content will appear automatically!</li>
-                    </ol>
-                </div>
-                
-                <div class="status-message" id="status-message">
-                    Preparing your download... Please wait
-                </div>
-                
-                <div id="loading-container">
-                    <p>Processing your download. This may take 10-12 seconds...</p>
-                    <div class="progress-bar">
-                        <div id="progress-bar-inner"></div>
-                    </div>
-                    <div class="progress-text">
-                        <span>0%</span>
-                        <span id="progress-percentage">0%</span>
-                    </div>
-                </div>
+    <nav class="nav-mobile" id="mobile-nav">
+        <a href="#">Home</a>
+        <a href="#">How to Download</a>
+        <a href="#">About Us</a>
+        <a href="#">Contact</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+    </nav>
+
+    <main>
+        <h1 class="main-title">Instagram Video & Photo Downloader</h1>
+
+        <div class="iframe-wrapper" id="iframe-wrapper">
+            <iframe 
+                id="downloader-iframe"
+                src="https://reelsave.app/"
+                scrolling="no"
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <div id="loading-container">
+            <p>Your file is being prepared, please wait...</p>
+            <div class="progress-bar">
+                <div id="progress-bar-inner"></div>
             </div>
         </div>
-    </section>
 
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="container">
-            <h2 class="text-center">Why Choose Our Instagram Downloader?</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-bolt"></i>
-                    </div>
-                    <h3>Lightning Fast</h3>
-                    <p>Download Instagram videos and photos in seconds with our optimized processing technology.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-shield-alt"></i>
-                    </div>
-                    <h3>100% Safe</h3>
-                    <p>No registration required. We don't store your data or content. Privacy first approach.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3>Mobile Friendly</h3>
-                    <p>Works perfectly on all devices - smartphones, tablets, and desktop computers.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-cloud-download-alt"></i>
-                    </div>
-                    <h3>High Quality</h3>
-                    <p>Download videos and photos in the highest available quality without compression.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-tags"></i>
-                    </div>
-                    <h3>Completely Free</h3>
-                    <p>No hidden fees, subscriptions, or watermarks. Download as much as you want.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon">
-                        <i class="fas fa-lock-open"></i>
-                    </div>
-                    <h3>No Watermark</h3>
-                    <p>All downloads are clean without any added logos or watermarks.</p>
-                </div>
-            </div>
+        <div class="container content-article">
+            <h2>The Ultimate Tool to Download Instagram Content</h2>
+            <p>
+                Welcome to the best online resource for downloading Instagram content. Whether you want to save a memorable video from your feed, a stunning photo from a friend, an inspiring Reel, or a fleeting Story, our tool makes it simple, fast, and completely free. You no longer need to take screenshots or use complicated software; everything you need is right here.
+            </p>
+
+            <h3>Why Use Our Instagram Downloader?</h3>
+            <p>
+                Our platform was designed with user experience in mind. We provide a seamless way to save high-quality media from Instagram directly to your device (phone, tablet, or computer). Here’s what makes our service stand out:
+            </p>
+            <ul>
+                <li><strong>Completely Free:</strong> No hidden costs, no subscription fees. Download as much as you want, whenever you want.</li>
+                <li><strong>High-Quality Downloads:</strong> We fetch the media in the best possible resolution available, ensuring your saved photos and videos look crisp and clear.</li>
+                <li><strong>No Software Installation:</strong> Our tool is 100% web-based. You don't need to install any apps or browser extensions.</li>
+                <li><strong>Safe and Secure:</strong> Your privacy is important. We don't track your downloads or store your personal data. The process is anonymous.</li>
+                <li><strong>Supports All Content Types:</strong> Easily download Videos, Photos, Reels, and Stories.</li>
+            </ul>
+
+            <h3>How to Download Instagram Videos and Photos</h3>
+            <p>
+                The process is incredibly straightforward. Just follow these three simple steps:
+            </p>
+            <ol>
+                <li><strong>Copy the Link:</strong> Open the Instagram app or website, find the photo, video, or Reel you want to download, tap the three dots (●●●) and select "Copy Link".</li>
+                <li><strong>Paste the Link:</strong> Come back to our website and paste the copied link into the input box at the top of the page.</li>
+                <li><strong>Download:</strong> Click the download button. Our system will process the link, and in moments, you'll be given a link to save the media file directly to your device.</li>
+            </ol>
+            <p>
+                <strong>Disclaimer:</strong> This tool is intended for personal use only. Please respect the intellectual property rights of content creators. Always get permission before reposting or distributing content that is not your own.
+            </p>
         </div>
-    </section>
+    </main>
 
-    <!-- How It Works Section -->
-    <section class="how-it-works" id="how-it-works">
-        <div class="container">
-            <h2 class="text-center">How to Download Instagram Content</h2>
-            <div class="steps">
-                <div class="step">
-                    <h3>Copy Instagram URL</h3>
-                    <p>Go to Instagram and copy the URL of the post, reel, story, or IGTV video you want to download.</p>
-                </div>
-                <div class="step">
-                    <h3>Paste URL & Download</h3>
-                    <p>Paste the copied URL into our downloader and click the "Download Now" button.</p>
-                </div>
-                <div class="step">
-                    <h3>Save Your Content</h3>
-                    <p>Choose your preferred format and quality, then save the content to your device.</p>
-                </div>
-            </div>
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="#">About Us</a>
+            <a href="#">Terms of Service</a>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Contact</a>
         </div>
-    </section>
-
-    <!-- MODIFIED: URL Blocking Section has been completely removed from the HTML -->
-
-    <!-- FAQ Section -->
-    <section class="faq" id="faq">
-        <div class="container">
-            <h2 class="text-center">Frequently Asked Questions</h2>
-            <div class="faq-container">
-                <div class="faq-item">
-                    <div class="faq-question">Is this Instagram downloader free to use?</div>
-                    <div class="faq-answer">
-                        <p>Yes, our Instagram downloader is completely free to use. There are no hidden fees, subscriptions, or premium versions. You can download as many Instagram videos and photos as you want without any cost.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Can I download private Instagram content?</div>
-                    <div class="faq-answer">
-                        <p>No, for privacy and security reasons, our tool can only download content from public Instagram accounts. Private accounts require authentication which we don't support to protect user privacy.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">What formats can I download in?</div>
-                    <div class="faq-answer">
-                        <p>Our downloader supports multiple formats:
-                            <ul>
-                                <li>Videos: MP4 (HD, Full HD)</li>
-                                <li>Photos: JPG, PNG (original quality)</li>
-                                <li>Stories: MP4 video or JPG images</li>
-                                <li>Reels: MP4 video with audio</li>
-                            </ul>
-                        </p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Is it legal to download Instagram content?</div>
-                    <div class="faq-answer">
-                        <p>Our tool is designed for personal use only. Always respect copyright laws and the original creator's rights. Download content only if you have permission from the copyright holder or for personal fair use. We do not condone copyright infringement.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Can I download Instagram Stories?</div>
-                    <div class="faq-answer">
-                        <p>Yes, you can download both images and videos from Instagram Stories. Simply copy the story URL while it's live (using the "Copy Link" option in the story menu) and paste it into our downloader.</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question">Why does the download process take 10-12 seconds?</div>
-                    <div class="faq-answer">
-                        <p>This processing time allows us to:
-                            <ol>
-                                <li>Verify the Instagram URL and content availability</li>
-                                <li>Extract the video/photo in the highest quality</li>
-                                <li>Remove any watermarks or tracking elements</li>
-                                <li>Ensure the download is safe and virus-free</li>
-                            </ol>
-                            This brief wait ensures you get the best possible download quality.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Comparison Section -->
-    <section class="comparison">
-        <div class="container">
-            <h2 class="text-center">Why We're Better Than Alternatives</h2>
-            <div class="table-container">
-                <table class="comparison-table">
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>InstaSavePro</th>
-                            <th>Other Downloaders</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="feature">No Watermark</td>
-                            <td class="yes">Yes</td>
-                            <td class="no">Usually adds watermark</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">HD Quality</td>
-                            <td class="yes">Full HD available</td>
-                            <td>Limited to 720p</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Download Speed</td>
-                            <td class="yes">10-12 seconds</td>
-                            <td>20-30+ seconds</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Reels Support</td>
-                            <td class="yes">Full support</td>
-                            <td class="yes">Varies</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Stories Download</td>
-                            <td class="yes">Yes</td>
-                            <td class="no">Often not supported</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">No Registration</td>
-                            <td class="yes">Required</td>
-                            <td class="no">Often required</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Mobile Friendly</td>
-                            <td class="yes">Perfect experience</td>
-                            <td>Varies</td>
-                        </tr>
-                        <tr>
-                            <td class="feature">Ads & Popups</td>
-                            <td class="no">Minimal</td>
-                            <td class="yes">Excessive</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer id="footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-column">
-                    <h3>InstaSavePro</h3>
-                    <p>The fastest and most reliable Instagram downloader online. Download videos, photos, reels, and stories in HD quality without watermark.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-pinterest"></i></a>
-                    </div>
-                </div>
-                <div class="footer-column">
-                    <h3>Quick Links</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#features">Features</a></li>
-                        <li><a href="#how-it-works">How It Works</a></li>
-                        <li><a href="#faq">FAQ</a></li>
-                        <li><a href="#">Blog</a></li>
-                        <li><a href="#">Contact Us</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Legal</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Terms of Service</a></li>
-                        <li><a href="#">Privacy Policy</a></li>
-                        <li><a href="#">Cookie Policy</a></li>
-                        <li><a href="#">Copyright Notice</a></li>
-                        <li><a href="#">Disclaimer</a></li>
-                    </ul>
-                </div>
-                <div class="footer-column">
-                    <h3>Support</h3>
-                    <ul class="footer-links">
-                        <li><a href="#">Help Center</a></li>
-                        <li><a href="#">Contact Support</a></li>
-                        <li><a href="#">Report a Problem</a></li>
-                        <li><a href="#">Feature Request</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="copyright">
-                © 2023 InstaSavePro. All rights reserved. This site is not affiliated with Instagram or Meta Platforms Inc.
-            </div>
+        <div class="copyright">
+            © 2024 IG Saver. All Rights Reserved. We are not affiliated with Instagram.
         </div>
     </footer>
 
+
     <script>
-        // Mobile Menu Toggle
-        const mobileToggle = document.getElementById('mobileToggle');
-        const navMenu = document.getElementById('navMenu');
-        
-        mobileToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-        });
-        
-        // FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            question.addEventListener('click', () => {
-                item.classList.toggle('active');
-            });
-        });
-        
-        // Download Process
-        const loadingContainer = document.getElementById('loading-container');
-        const progressBarInner = document.getElementById('progress-bar-inner');
-        const progressPercentage = document.getElementById('progress-percentage');
+        // === Element Selection ===
+        const hamburgerBtn = document.getElementById('hamburger-btn');
+        const mobileNav = document.getElementById('mobile-nav');
+        const openIcon = hamburgerBtn.querySelector('.open-icon');
+        const closeIcon = hamburgerBtn.querySelector('.close-icon');
+
         const iframeWrapper = document.getElementById('iframe-wrapper');
         const downloaderIframe = document.getElementById('downloader-iframe');
-        const statusMessage = document.getElementById('status-message');
+        const loadingContainer = document.getElementById('loading-container');
+        const progressBarInner = document.getElementById('progress-bar-inner');
         
-        // --- MODIFIED: URL Blocking System (Backend Logic Only) ---
-        // Add any domain or partial URL you want to block into this array.
-        // For example: const blockedUrls = ['badsite.com', 'anotherexample.net/block-this-path'];
-        const blockedUrls = [];
-        
-        // Function to check if a URL is blocked (kept for potential future use)
-        // You would call this function where you handle URLs, e.g., isUrlBlocked(someUrl)
-        function isUrlBlocked(url) {
-            if (!url) return false;
-            return blockedUrls.some(blockedUrl => url.includes(blockedUrl));
-        }
+        // === Responsive Navigation Menu Logic ===
+        hamburgerBtn.addEventListener('click', () => {
+            mobileNav.classList.toggle('open');
+            const isOpen = mobileNav.classList.contains('open');
+            openIcon.style.display = isOpen ? 'none' : 'block';
+            closeIcon.style.display = isOpen ? 'block' : 'none';
+        });
+
+        // === Iframe Expansion Logic ===
         
         /**
-         * Expand the iframe after processing
+         * Expands the iframe to show full content after the timer.
          */
         function expandIframeView() {
-            console.log("Timer finished. Checking screen size and changing styles.");
+            console.log("Timer finished. Expanding iframe.");
             
-            // Hide the loading bar after a short delay
-            setTimeout(() => {
-                loadingContainer.style.display = 'none';
-            }, 500);
-            
+            // Hide the loading bar
+            loadingContainer.style.display = 'none';
+
             const isDesktop = window.matchMedia('(min-width: 768px)').matches;
 
             if (isDesktop) {
                 // --- DESKTOP & LAPTOP EXPANDED VALUES ---
-                console.log("Applying DESKTOP styles.");
-                iframeWrapper.style.height = '550px';
-                downloaderIframe.style.height = '600px';
-                downloaderIframe.style.marginTop = '-100px';
-
+                iframeWrapper.style.height = '740px';
+                downloaderIframe.style.height = '800px';
+                downloaderIframe.style.marginTop = '-50px';
             } else {
                 // --- MOBILE EXPANDED VALUES ---
-                console.log("Applying MOBILE styles.");
-                iframeWrapper.style.height = '450px';
-                downloaderIframe.style.height = '500px';
+                iframeWrapper.style.height = '710px';
+                downloaderIframe.style.height = '850px';
                 downloaderIframe.style.marginTop = '-125px';
             }
             
-            // MODIFIED: This line was commented out to disable scrolling in the iframe
-            // downloaderIframe.scrolling = 'auto'; 
-            
-            downloaderIframe.style.pointerEvents = 'auto';
-            
-            // Scroll to iframe position
-            iframeWrapper.scrollIntoView({ behavior: 'smooth' });
+            downloaderIframe.scrolling = 'no'; // Keep as 'no' for a seamless look
         }
 
-        // This function starts the whole process.
-        function startProcess() {
-            console.log("Interaction detected. Starting process.");
-
-            // Show status message
-            statusMessage.style.display = 'block';
-            statusMessage.textContent = "Preparing your download... Please wait";
+        /**
+         * Shows the loading bar and starts the 10-second progress animation.
+         */
+        function showLoadingBar() {
+             console.log("5-second delay finished. Showing loading bar.");
             
-            // Wait 5 seconds before showing the progress bar
+            // 1. Show the loading container.
+            loadingContainer.style.display = 'block';
+
+            // 2. Smoothly scroll the loading bar into view.
+            loadingContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // 3. Start the progress bar animation after a brief moment.
             setTimeout(() => {
-                // Update status message
-                statusMessage.textContent = "Processing your request...";
-                
-                // Show the loading container.
-                loadingContainer.style.display = 'block';
-                
-                // Reset progress bar
-                progressBarInner.style.width = '0%';
-                progressPercentage.textContent = '0%';
-                
-                // Start the progress bar animation (the visible 10-second timer).
-                setTimeout(() => {
-                    progressBarInner.style.width = '100%';
-                }, 100);
-                
-                // Simulate progress percentage
-                let progress = 0;
-                const interval = setInterval(() => {
-                    progress += 1;
-                    progressPercentage.textContent = progress + '%';
-                    
-                    if (progress >= 100) {
-                        clearInterval(interval);
-                    }
-                }, 100); // 100ms * 100 = 10 seconds
+                progressBarInner.style.width = '100%';
+            }, 100);
 
-                // After 10 seconds, call the function to expand the iframe
-                setTimeout(expandIframeView, 10000); // 10000ms = 10 seconds
-            }, 5000); // 5000ms = 5 seconds
+            // 4. After 10 seconds, call the function to expand the iframe.
+            setTimeout(expandIframeView, 10000); // 10000ms = 10 seconds
         }
 
-        // The reliable trigger: listen for the mouse to move over the iframe's container.
-        iframeWrapper.addEventListener('mouseover', () => {
-            // Enable the iframe for interaction
-            downloaderIframe.style.pointerEvents = 'auto';
-            
-            // Start the process
-            startProcess();
-        }, { once: true });
+        /**
+         * The main function that starts the entire process after a 5-second delay.
+         */
+        function startProcess() {
+            console.log("Interaction detected. Starting 5-second delay...");
+            // After a 5-second delay, show the loading bar.
+            setTimeout(showLoadingBar, 5000); // 5000ms = 5 seconds
+        }
 
-        // Block iframe scrolling by default
-        downloaderIframe.addEventListener('load', function() {
-            try {
-                this.contentWindow.document.body.style.overflow = 'hidden';
-            } catch (e) {
-                console.warn("Could not set styles on iframe content due to cross-origin restrictions.", e);
-            }
-        });
-
+        // Add an event listener to the iframe's container.
+        // { once: true } ensures this only ever runs one time.
+        iframeWrapper.addEventListener('mouseover', startProcess, { once: true });
     </script>
+
 </body>
 </html>
