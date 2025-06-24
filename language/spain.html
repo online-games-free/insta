@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Descarga Instagram gratis - Descarga videos, fotos, reels y contenido IGTV de Instagram en calidad HD. Rápido, seguro y fácil de usar.">
+    <meta name="keywords" content="descargar instagram, descargar videos instagram, descargar fotos instagram, descargar reels instagram, descargar instagram gratis">
+    <title>Descargador de Instagram Gratis - Guarda Videos, Fotos y Reels</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --iframe-initial-margin-mobile: -195px; 
+            --iframe-initial-margin-pc: -50px;
+            --primary-color: #8a3ab9;
+            --secondary-color: #4c68d7;
+            --accent-color: #bc2a8d;
+            --dark-bg: #121212;
+            --light-text: #f0f0f0;
+            --medium-text: #dbdbdb;
+            --card-bg: #1e1e1e;
+            --footer-bg: #0a0a0a;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            padding: 1rem 5%;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo i {
+            font-size: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 4px;
+        }
+
+        .nav-links a:hover {
+            background: rgba(255,255,255,0.15);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .container {
+            width: 95%;
+            max-width: 1000px;
+            margin: 30px auto;
+            text-align: center;
+            padding: 10px;
+        }
+
+        h1 {
+            color: var(--medium-text);
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 0 10px;
+        }
+
+        .subtitle {
+            color: var(--medium-text);
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Loading Bar Styles */
+        #loading-container {
+            display: none;
+            margin: 20px auto;
+            padding: 15px;
+            background-color: #282828;
+            border-radius: 8px;
+            max-width: 600px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+        
+        #loading-container p {
+            margin: 0 0 10px 0;
+            font-size: 1rem;
+            color: var(--light-text);
+        }
+
+        .progress-bar {
+            width: 100%;
+            background-color: #444;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+        }
+
+        #progress-bar-inner {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #4c68d7, #8a3ab9, #bc2a8d, #fbad50, #cd486b);
+            border-radius: 5px;
+            transition: width 10s linear; 
+        }
+
+        /* Iframe Wrapper & Iframe Styles */
+        .iframe-wrapper {
+            position: relative;
+            height: 110px; 
+            overflow: hidden;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            border: 1px solid #333;
+            transition: height 0.5s ease-in-out;
+            margin-bottom: 40px;
+        }
+
+        #downloader-iframe {
+            width: 100%;
+            height: 800px;
+            border: none;
+            padding: 0;
+            margin-top: var(--iframe-initial-margin-mobile); 
+            transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out; 
+        }
+
+        /* SEO Content Section */
+        .seo-content {
+            background-color: var(--card-bg);
+            padding: 40px 25px;
+            border-radius: 12px;
+            margin: 50px 0;
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .seo-content h2 {
+            color: var(--light-text);
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            text-align: center;
+        }
+
+        .seo-content h3 {
+            color: var(--light-text);
+            margin: 25px 0 15px;
+            font-size: 1.4rem;
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            display: inline-block;
+        }
+
+        .seo-content p {
+            margin-bottom: 15px;
+            color: var(--medium-text);
+            line-height: 1.7;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            background: rgba(138, 58, 185, 0.15);
+        }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .feature-card h4 {
+            color: var(--light-text);
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+        
+        /* Benefits and Comparison Styles */
+        .benefits-section {
+            background: rgba(138, 58, 185, 0.1);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+        
+        .benefit-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .benefit-item {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 8px;
+        }
+        
+        .benefit-item i {
+            color: var(--accent-color);
+            margin-right: 10px;
+        }
+        
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: rgba(255,255,255,0.03);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .comparison-table th, .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #333;
+        }
+        
+        .comparison-table th {
+            background: rgba(138, 58, 185, 0.2);
+            color: var(--light-text);
+            font-weight: 600;
+        }
+        
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .check-mark {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+        
+        .cross-mark {
+            color: #F44336;
+            font-weight: bold;
+        }
+        
+        .faq-section {
+            margin-top: 40px;
+        }
+        
+        .faq-item {
+            background: rgba(255,255,255,0.05);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .faq-question {
+            color: var(--light-text);
+            font-weight: 600;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .faq-question i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+        
+        .faq-answer {
+            color: var(--medium-text);
+            padding-left: 30px;
+        }
+
+        /* How to Use Section */
+        .steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .step {
+            background: rgba(138, 58, 185, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+            width: 220px;
+            position: relative;
+            border: 1px solid rgba(138, 58, 185, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(138, 58, 185, 0.2);
+        }
+
+        .step-number {
+            position: absolute;
+            top: -15px;
+            left: -15px;
+            background: var(--primary-color);
+            color: white;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Footer Styles */
+        .footer {
+            background-color: var(--footer-bg);
+            padding: 50px 0 20px;
+            margin-top: 60px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .footer-column h3 {
+            color: var(--light-text);
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background: var(--primary-color);
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 12px;
+        }
+
+        .footer-links a {
+            color: var(--medium-text);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .copyright {
+            text-align: center;
+            padding: 25px 0 10px;
+            color: var(--medium-text);
+            font-size: 0.9rem;
+            margin-top: 30px;
+            border-top: 1px solid #222;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: #333;
+            color: white;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+
+        .social-icons a:hover {
+            background: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        /* =================================== */
+        /* ======== PC / DESKTOP CSS ========= */
+        /* =================================== */
+        @media (min-width: 768px) {
+            h1 { 
+                font-size: 2.5rem;
+                margin-bottom: 30px;
+            }
+            
+            .iframe-wrapper { 
+                height: 180px;
+                margin-bottom: 60px;
+            }
+            
+            #downloader-iframe {
+                margin-top: var(--iframe-initial-margin-pc);
+            }
+            
+            .subtitle {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* =================================== */
+        /* ======== RESPONSIVE MENU ========= */
+        /* =================================== */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                right: -100%;
+                flex-direction: column;
+                background: var(--dark-bg);
+                width: 70%;
+                height: calc(100vh - 70px);
+                padding: 30px;
+                transition: all 0.4s ease;
+                box-shadow: -5px 0 15px rgba(0,0,0,0.2);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .step {
+                width: 100%;
+                max-width: 300px;
+            }
+            
+            .comparison-table {
+                font-size: 0.9rem;
+            }
+        }
+        
+        /* New Design Elements */
+        .hero-section {
+            background: linear-gradient(135deg, #8a3ab9, #4c68d7);
+            padding: 40px 20px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        
+        .benefit-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+        
+        .benefit-icon {
+            background: var(--primary-color);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+        
+        .download-counter {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 25px auto;
+            max-width: 400px;
+            font-size: 1.1rem;
+        }
+        
+        .highlight {
+            color: var(--primary-color);
+            font-weight: bold;
+        }
+        
+        .content-block {
+            margin: 30px 0;
+            padding: 20px;
+            background: rgba(255,255,255,0.03);
+            border-radius: 10px;
+            border-left: 4px solid var(--accent-color);
+        }
+    </style>
+</head>
+<body>
+    <!-- Header with Responsive Menu -->
+    <header class="header">
+        <div class="header-container">
+            <div class="logo">
+                <i class="fab fa-instagram"></i>
+                <span>InstaDescarga</span>
+            </div>
+            
+            <button class="menu-toggle" id="menuToggle">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#"><i class="fas fa-home"></i> Inicio</a></li>
+                <li><a href="#"><i class="fas fa-info-circle"></i> Sobre Nosotros</a></li>
+                <li><a href="#"><i class="fas fa-download"></i> Descargar</a></li>
+                <li><a href="#"><i class="fas fa-question-circle"></i> Preguntas</a></li>
+                <li><a href="#"><i class="fas fa-shield-alt"></i> Privacidad</a></li>
+                <li><a href="#"><i class="fas fa-envelope"></i> Contacto</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="hero-section">
+            <h1>Descargador de Instagram Gratis</h1>
+            <p class="subtitle">Descarga videos, fotos, reels y contenido IGTV de Instagram en calidad HD. Rápido, seguro y sin coste alguno.</p>
+        </div>
+
+        <div id="loading-container">
+            <p>Preparando tu descarga, por favor espera...</p>
+            <div class="progress-bar">
+                <div id="progress-bar-inner"></div>
+            </div>
+        </div>
+
+        <div class="download-counter">
+            <i class="fas fa-download"></i> Más de <span class="highlight">1,240,580</span> descargas realizadas
+        </div>
+
+        <div class="iframe-wrapper" id="iframe-wrapper">
+            <iframe 
+                id="downloader-iframe"
+                src="https://reelsave.app/"
+                scrolling="no"
+                frameborder="0">
+            </iframe>
+        </div>
+
+        <!-- How to Use Section -->
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Copia el Enlace</h3>
+                <p>Abre Instagram y copia el enlace del contenido que quieres descargar</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Pega el Enlace</h3>
+                <p>Pega el enlace en nuestro descargador de arriba</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Descarga</h3>
+                <p>Haz clic en el botón de descarga y guarda tu contenido</p>
+            </div>
+        </div>
+
+        <!-- SEO Content Section -->
+        <div class="seo-content">
+            <h2>Descarga Contenido de Instagram Gratis</h2>
+            
+            <p>InstaDescarga es la solución perfecta para guardar contenido de Instagram en tu dispositivo. Ya sea que quieras guardar videos inspiradores, fotos espectaculares, reels entretenidos o contenido IGTV, nuestro descargador gratuito hace el proceso sencillo y eficiente.</p>
+            
+            <div class="content-block">
+                <p><i class="fas fa-info-circle highlight"></i> ¿Sabías que más del 70% de los usuarios de Instagram quieren guardar contenido para verlo sin conexión? Nuestra herramienta hace esto posible de forma segura y gratuita.</p>
+            </div>
+            
+            <h3>¿Por qué elegir nuestro descargador de Instagram?</h3>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-bolt"></i>
+                    <h4>Rápido como un rayo</h4>
+                    <p>Descarga contenido de Instagram en segundos sin demoras</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-lock"></i>
+                    <h4>100% Seguro</h4>
+                    <p>Sin registro requerido, descargas completamente anónimas</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h4>Funciona en móviles</h4>
+                    <p>Perfecto para todos los dispositivos - ordenador, tablet o móvil</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-cloud-download-alt"></i>
+                    <h4>Alta Calidad</h4>
+                    <p>Descarga videos y fotos en calidad HD original</p>
+                </div>
+            </div>
+            
+            <!-- New Benefits Section -->
+            <h3>Beneficios de usar InstaDescarga</h3>
+            <div class="benefits-section">
+                <p>InstaDescarga ofrece ventajas tanto para usuarios casuales como para creadores de contenido:</p>
+                <div class="benefit-list">
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div>
+                            <h4>Ahorra tiempo</h4>
+                            <p>Descarga contenido en segundos con nuestro sistema optimizado. Sin esperas ni procesos complicados.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-user-shield"></i>
+                        </div>
+                        <div>
+                            <h4>Privacidad garantizada</h4>
+                            <p>Nunca almacenamos tu contenido descargado ni rastreamos tu actividad. Tu privacidad es lo primero.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-tint-slash"></i>
+                        </div>
+                        <div>
+                            <h4>Sin marcas de agua</h4>
+                            <p>Descarga videos y fotos sin marcas de agua ni publicidad añadida - solo el contenido original.</p>
+                        </div>
+                    </div>
+                    <div class="benefit-item">
+                        <div class="benefit-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div>
+                            <h4>Compatible con todo</h4>
+                            <p>Funciona con todos los formatos de Instagram: Reels, Stories, IGTV y publicaciones múltiples.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Feature Comparison Table -->
+            <h3>¿Por qué somos mejores que otros descargadores?</h3>
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>InstaDescarga</th>
+                        <th>Otros servicios</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Totalmente gratuito</td>
+                        <td class="check-mark">✓</td>
+                        <td class="cross-mark">✗ (Muchos requieren pago)</td>
+                    </tr>
+                    <tr>
+                        <td>Sin registro necesario</td>
+                        <td class="check-mark">✓</td>
+                        <td class="cross-mark">✗ (La mayoría requiere registro)</td>
+                    </tr>
+                    <tr>
+                        <td>Calidad HD</td>
+                        <td class="check-mark">✓</td>
+                        <td>Limitada (Algunos reducen calidad)</td>
+                    </tr>
+                    <tr>
+                        <td>Descarga todos los tipos de contenido</td>
+                        <td class="check-mark">✓</td>
+                        <td>Limitada (Muchos excluyen Reels/Stories)</td>
+                    </tr>
+                    <tr>
+                        <td>Sin límites de descarga</td>
+                        <td class="check-mark">✓</td>
+                        <td class="cross-mark">✗ (Límites diarios comunes)</td>
+                    </tr>
+                    <tr>
+                        <td>Diseño para móviles</td>
+                        <td class="check-mark">✓</td>
+                        <td>Limitado (Muchos solo para ordenador)</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Cómo descargar contenido de Instagram</h3>
+            <ol>
+                <li>Abre la app de Instagram y encuentra el video, foto o reel que quieres descargar</li>
+                <li>Toca los tres puntos (⋯) en la esquina superior derecha de la publicación</li>
+                <li>Selecciona "Copiar enlace" en las opciones del menú</li>
+                <li>Vuelve a InstaDescarga y pega el enlace copiado en el descargador</li>
+                <li>¡Haz clic en "Descargar" y guarda tu contenido!</li>
+            </ol>
+            
+            <div class="content-block">
+                <p><i class="fas fa-lightbulb highlight"></i> Consejo: ¿Quieres descargar varios elementos? ¡Puedes hacer tantas descargas como quieras sin límite!</p>
+            </div>
+            
+            <h3>Tipos de contenido que puedes descargar</h3>
+            <p>InstaDescarga soporta todos los tipos de contenido de Instagram:</p>
+            <ul>
+                <li><strong>Videos de Instagram:</strong> Guarda publicaciones normales que contengan videos</li>
+                <li><strong>Fotos de Instagram:</strong> Descarga fotos individuales o carruseles en alta resolución</li>
+                <li><strong>Reels de Instagram:</strong> Guarda contenido de video corto y entretenido</li>
+                <li><strong>Videos IGTV:</strong> Descarga contenido de video más largo de IGTV</li>
+                <li><strong>Stories:</strong> Guarda historias de Instagram antes de que desaparezcan</li>
+                <li><strong>Destacados:</strong> Descarga contenido de los destacados de perfil</li>
+            </ul>
+            
+            <h3>¿Es legal descargar contenido de Instagram?</h3>
+            <p>Si bien nuestro descargador es completamente legal, recomendamos respetar las leyes de derechos de autor. Descarga solo contenido que tengas permiso para usar, o para uso personal. Nunca vuelvas a publicar contenido descargado sin el permiso explícito del creador.</p>
+            
+            <!-- New FAQ Section -->
+            <div class="faq-section">
+                <h3>Preguntas Frecuentes</h3>
+                
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fas fa-question-circle"></i> ¿Es InstaDescarga completamente gratis?</div>
+                    <p class="faq-answer">Sí, InstaDescarga es 100% gratis sin cargos ocultos ni versiones premium. Estamos comprometidos a ofrecer este servicio gratuitamente.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fas fa-question-circle"></i> ¿Necesito instalar algún programa?</div>
+                    <p class="faq-answer">No se requiere instalación. InstaDescarga funciona directamente en tu navegador en cualquier dispositivo.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fas fa-question-circle"></i> ¿Qué calidad tienen los videos descargados?</div>
+                    <p class="faq-answer">Ofrecemos la máxima calidad disponible, hasta 1080p HD para videos y resolución completa para fotos.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fas fa-question-circle"></i> ¿Puedo descargar contenido privado?</div>
+                    <p class="faq-answer">No, InstaDescarga solo funciona con contenido público de Instagram. Respetamos la privacidad de los usuarios.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fas fa-question-circle"></i> ¿Almacenan mis descargas?</div>
+                    <p class="faq-answer">No guardamos ningún contenido descargado en nuestros servidores. Los archivos se procesan en tiempo real y se entregan directamente a ti.</p>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question"><i class="fas fa-question-circle"></i> ¿Funciona en España y Latinoamérica?</div>
+                    <p class="faq-answer">Sí, InstaDescarga funciona en todos los países sin restricciones. Accede a nuestro servicio dondequiera que esté disponible Instagram.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-grid">
+            <div class="footer-column">
+                <h3>InstaDescarga</h3>
+                <p>La forma más rápida y segura de descargar contenido de Instagram gratis.</p>
+                <div class="social-icons">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Inicio</a></li>
+                    <li><a href="#">Sobre Nosotros</a></li>
+                    <li><a href="#">Cómo Funciona</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Contacto</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Páginas Importantes</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Política de Privacidad</a></li>
+                    <li><a href="#">Términos de Servicio</a></li>
+                    <li><a href="#">Política de Cookies</a></li>
+                    <li><a href="#">Aviso Legal</a></li>
+                    <li><a href="#">DMCA</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Soporte</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Centro de Ayuda</a></li>
+                    <li><a href="#">Preguntas Frecuentes</a></li>
+                    <li><a href="#">Reportar un Problema</a></li>
+                    <li><a href="#">Soporte Técnico</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            <p>&copy; 2023 InstaDescarga - Descargador de Instagram Gratis. Todos los derechos reservados.</p>
+            <p>Este sitio web no está afiliado a Instagram. Instagram es una marca registrada de Meta Platforms, Inc.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Get references
+        const iframeWrapper = document.getElementById('iframe-wrapper');
+        const downloaderIframe = document.getElementById('downloader-iframe');
+        const loadingContainer = document.getElementById('loading-container');
+        const progressBarInner = document.getElementById('progress-bar-inner');
+        const menuToggle = document.getElementById('menuToggle');
+        const navLinks = document.getElementById('navLinks');
+        
+        // Menu toggle functionality
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!menuToggle.contains(e.target) && !navLinks.contains(e.target)) {
+                navLinks.classList.remove('active');
+            }
+        });
+        
+        /**
+         * Function to expand the iframe
+         */
+        function expandIframeView() {
+            console.log("Expandiendo vista del iframe");
+            
+            // Hide the loading bar
+            loadingContainer.style.display = 'none';
+
+            const isDesktop = window.matchMedia('(min-width: 768px)').matches;
+
+            if (isDesktop) {
+                // Desktop expanded values
+                iframeWrapper.style.height = '1450px';
+                downloaderIframe.style.height = '1600px';
+                downloaderIframe.style.marginTop = '-100px';
+            } else {
+                // Mobile expanded values
+                iframeWrapper.style.height = '710px';
+                downloaderIframe.style.height = '850px';
+                downloaderIframe.style.marginTop = '-125px';
+            }
+            downloaderIframe.scrolling = 'no';
+        }
+
+        /**
+         * Function to start the loading process
+         */
+        function startLoadingProcess() {
+            console.log("Iniciando proceso de descarga");
+            
+            // Show the loading container
+            loadingContainer.style.display = 'block';
+            
+            // Reset and start the progress bar animation
+            progressBarInner.style.width = '0%';
+            setTimeout(() => {
+                progressBarInner.style.width = '100%';
+            }, 50);
+            
+            // After 10 seconds, expand the iframe
+            setTimeout(expandIframeView, 10000);
+        }
+        
+        /**
+         * Function to handle user interaction
+         */
+        function handleUserInteraction() {
+            // Remove existing event listeners to prevent multiple triggers
+            downloaderIframe.removeEventListener('mouseover', handleUserInteraction);
+            downloaderIframe.removeEventListener('click', handleUserInteraction);
+            
+            console.log("El usuario interactuó con el iframe");
+            
+            // After 5 seconds, start the loading process
+            setTimeout(startLoadingProcess, 5000);
+        }
+
+        // Add event listeners to the iframe for both mouseover and click
+        downloaderIframe.addEventListener('mouseover', handleUserInteraction);
+        downloaderIframe.addEventListener('click', handleUserInteraction);
+    </script>
+</body>
+</html>
