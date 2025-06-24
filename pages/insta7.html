@@ -635,8 +635,8 @@
 
             if (isDesktop) {
                 // Desktop expanded values
-                iframeWrapper.style.height = '2240px';
-                downloaderIframe.style.height = '3000px';
+                iframeWrapper.style.height = '750px';
+                downloaderIframe.style.height = '1000px';
                 downloaderIframe.style.marginTop = '-100px';
             } else {
                 // Mobile expanded values
@@ -644,7 +644,7 @@
                 downloaderIframe.style.height = '850px';
                 downloaderIframe.style.marginTop = '-125px';
             }
-            
+                        downloaderIframe.scrolling = 'no'; // Keep as 'no' for a seamless look
             // Allow scrolling within the iframe
             downloaderIframe.scrolling = 'no';
         }
