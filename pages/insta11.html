@@ -23,6 +23,9 @@
             --medium-text: #dbdbdb;
             --card-bg: #1e1e1e;
             --footer-bg: #0a0a0a;
+            /* Blur effect variables */
+            --blur-strength: 8px;
+            --blur-transition: filter 0.5s ease;
         }
 
         /* =================================== */
@@ -184,7 +187,14 @@
             /* ** CSS CHANGE: Using margin-top now, not transform ** */
             margin-top: var(--iframe-initial-margin-mobile); 
             /* Transitions for margin and height to expand smoothly */
-            transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out; 
+            transition: margin-top 0.5s ease-in-out, height 0.5s ease-in-out, var(--blur-transition);
+            /* Initial state - no blur */
+            filter: blur(0);
+        }
+        
+        /* NEW: Blur effect class for iframe */
+        #downloader-iframe.blurry {
+            filter: blur(var(--blur-strength));
         }
 
         /* SEO Content Section */
@@ -856,6 +866,9 @@
         
         // Hide the loading bar
         loadingContainer.style.display = 'none';
+        
+        // Remove the blur effect
+        downloaderIframe.classList.remove('blurry');
 
         const isDesktop = window.matchMedia('(min-width: 768px)').matches;
 
@@ -882,13 +895,16 @@
         // Show the loading container
         loadingContainer.style.display = 'block';
         
+        // Apply the blur effect to the iframe
+        downloaderIframe.classList.add('blurry');
+        
         // Reset and start the progress bar animation
         progressBarInner.style.width = '0%';
         setTimeout(() => {
             progressBarInner.style.width = '100%';
         }, 50);
         
-        // After 10 seconds, expand the iframe
+        // After 10 seconds, expand the iframe and remove blur
         setTimeout(expandIframeView, 10000);
     }
     
