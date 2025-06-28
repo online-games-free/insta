@@ -196,7 +196,36 @@
         #downloader-iframe.blurry {
             filter: blur(var(--blur-strength));
         }
-
+/* Download Button Container */
+        .download-button-container {
+            margin: 20px 0 40px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        #download-again-btn {
+            background: linear-gradient(90deg, #8a3ab9, #bc2a8d);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(188, 42, 141, 0.3);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            animation: pulse 2s infinite;
+        }
+        
+        #download-again-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(188, 42, 141, 0.5);
+            animation: none;
+        }
         /* SEO Content Section */
         .seo-content {
             background-color: var(--card-bg);
@@ -539,7 +568,7 @@
         <div class="header-container">
             <div class="logo">
                 <i class="fab fa-instagram"></i>
-                <span>InstaSave</span>
+                <span>InstaSave Pro</span>
             </div>
             
             <button class="menu-toggle" id="menuToggle">
@@ -576,8 +605,15 @@
                 frameborder="0">
             </iframe>
         </div>
+        
+        <!-- Download Button - Always Visible -->
+        <div class="download-button-container">
+            <a href="https://online-games-free.github.io/insta/pages/insta11.html" id="download-again-btn">
+                <i class="fas fa-redo-alt"></i> Download Another File
+            </a>
+        </div>
 
-        <!-- How to Use Section -->
+         <!-- How to Use Section -->
         <div class="steps">
             <div class="step">
                 <div class="step-number">1</div>
@@ -858,6 +894,9 @@
             downloaderIframe.style.height = '800px';
             downloaderIframe.style.marginTop = '-195px';
         }
+        
+        // Reset blur effect
+        downloaderIframe.classList.remove('blurry');
     }
     
     // Expand iframe view
@@ -918,8 +957,8 @@
         
         console.log("User interacted with the iframe");
         
-        // After 5 seconds, start the loading process
-        setTimeout(startLoadingProcess, 5000);
+        // After 8 seconds, start the loading process
+        setTimeout(startLoadingProcess, 8000);
     }
 
     // Initialize iframe view on page load
